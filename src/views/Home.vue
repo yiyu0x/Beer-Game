@@ -1,13 +1,15 @@
 <template>
-  <HelloWorld />
+  <ButtonBox/>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+  // import HelloWorld from '../components/HelloWorld'
+  import ButtonBox from '../components/ButtonBox'
 
   export default {
     components: {
-      HelloWorld
+      // HelloWorld,
+      ButtonBox
     }
   }
 </script>

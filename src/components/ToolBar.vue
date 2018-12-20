@@ -1,16 +1,11 @@
 <template>
-  <v-toolbar :color="bar.class" :dark="bar.dark">
-    <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title>Title</v-toolbar-title>
+  <v-toolbar>
+    <v-toolbar-title>啤酒遊戲</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn icon>
-      <v-icon>search</v-icon>
-    </v-btn>
-    <v-btn icon>
-      <v-icon>favorite</v-icon>
-    </v-btn>
-    <v-btn icon>
-      <v-icon>more_vert</v-icon>
-    </v-btn>
+    <v-toolbar-items>
+      <v-btn flat>王翰揚</v-btn>
+      <v-btn flat>咖內</v-btn>
+      <v-btn flat>咖內</v-btn>
+    </v-toolbar-items>
   </v-toolbar>
 </template>
