@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-let mongodb_path = '';
+let mongodb_path = 'mongodb://localhost:27017/account';
 
 mongoose.connect(mongodb_path, { useNewUrlParser: true }, function(err, db) {
     if (err) {
