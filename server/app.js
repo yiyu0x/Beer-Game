@@ -6,22 +6,20 @@ const app = express();
 app.post('/register', (req, res) => {
     console.log('user in session')
     console.log(req.session);
-    //先查询有没有这个user
     console.log("req.body" + req.body);
     var UserName = req.body.username;
-    var UserPsw = req.body.password;
-    //通过账号验证
-    var updatestr = { username: UserName };
-    res.setHeader('Content-type', 'application/json;charset=utf-8')
-    console.log(updatestr);
-    Mongo.find(updatestr, function(err, obj) {
+    var UserPasswd = req.body.password;
+    var data = { username: UserName };
+    Mongo.find(data, function(err, obj) {
         if (err) {
             console.log("Error:" + err);
         } else {
             if (obj.length == 0) {
-                insert(UserName, UserPsw);
+                // insert(UserName, UserPsw);
+                console.log('not found')
                 res.send({ status: 'success', message: 'true' })
             } else {
+                console.log('found')
                 res.send({ status: 'success', message: 'false' })
             }
         }
