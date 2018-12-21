@@ -12,7 +12,7 @@ mongoose.connect(mongodb_path, { useNewUrlParser: true }, function(err, db) {
 
 const db = mongoose.connection;
 const Schema = new mongoose.Schema({});
-const Mongo = mongoose.model('Mongo', Schema, 'Account');
+const Mongo = mongoose.model('Mongo', Schema, 'account');
 
 // const fields = {
 //     _id: 0,
