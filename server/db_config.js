@@ -21,5 +21,6 @@ const Mongo = mongoose.model('Mongo', Schema, 'Account');
 // };
 
 module.exports = {
-    Mongo
+    Mongo, 
+    db
 }
