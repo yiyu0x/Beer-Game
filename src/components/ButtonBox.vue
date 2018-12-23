@@ -57,6 +57,7 @@
     </v-container>
 </template>
 <script>
+import { eventBus } from '../main';
 export default {
     data: () => ({
         dialog_login: false,
@@ -68,6 +69,7 @@ export default {
     }),
     methods: {
         login() {
+            
             // this.dialog_login = false;
             const data = {
                 username: this.loginUserName,
@@ -83,13 +85,17 @@ export default {
             }).then((jsonData) => {
                 if (jsonData.status == 1) {
                     // 登入成功
-                    console.log('登入成功')
+                    localStorage.setItem('token', 'ImLogin')
+                    this.dialog_login = false;
+                    eventBus.$emit('LoginStatus', 1);
+                    // console.log('登入成功')
                 } else {
                     // 登入失敗
-                    console.log('登入失敗 帳號或密碼錯誤')
+                    eventBus.$emit('LoginStatus', 0);
+                    // console.log('登入失敗 帳號或密碼錯誤')
                 }
             }).catch(function(err) {
-                console.log(err);
+                // console.log(err);
             })
         },
         submit() {
@@ -110,9 +116,11 @@ export default {
                 if (jsonData.status == 1) {
                     // 註冊成功
                     console.log('註冊成功')
+                    eventBus.$emit('RegisterStatus', 1);
                 } else {
                     // 註冊失敗
                     console.log('註冊失敗 用戶已存在')
+                    eventBus.$emit('RegisterStatus', 0);
                 }
             }).catch(function(err) {
                 console.log(err);
