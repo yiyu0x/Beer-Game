@@ -1,8 +1,8 @@
 <template>
-	<v-container>
-		<AlertLogin/>
-  		<ButtonBox/>
-	</v-container>
+    <v-container>
+        <AlertLogin/>
+        <ButtonBox/>
+    </v-container>
 </template>
 
 <script>

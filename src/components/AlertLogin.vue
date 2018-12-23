@@ -3,8 +3,7 @@
         <v-alert v-model="msg" 
                     :value="show" 
                     :color="color"
-                    outline
-                    transition="scale-transition">
+                    outline>
             {{ msg }}
         </v-alert>
     </div>

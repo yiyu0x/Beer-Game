@@ -14,9 +14,9 @@
 export default {
   data: () => ({}),
   methods: {
-  	logout () {
-  		localStorage.removeItem('token');
-  	}
+    logout () {
+        localStorage.removeItem('token');
+    }
   }
 };
 </script>

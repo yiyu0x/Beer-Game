@@ -11,10 +11,10 @@
                         <v-container grid-list-md>
                             <v-layout wrap>
                                 <v-flex xs12>
-                                    <v-text-field v-model="loginUserName" label="User name" required></v-text-field>
+                                    <v-text-field :rules="rules" v-model="loginUserName" label="User name" required></v-text-field>
                                 </v-flex>
                                 <v-flex xs12>
-                                    <v-text-field v-model="loginUserPasswd" label="Password" type="password" required></v-text-field>
+                                    <v-text-field :rules="rules" v-model="loginUserPasswd" label="Password" type="password" required></v-text-field>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -38,10 +38,10 @@
                         <v-container grid-list-md>
                             <v-layout wrap>
                                 <v-flex xs12>
-                                    <v-text-field v-model="registerUserName" label="User name" required></v-text-field>
+                                    <v-text-field :rules="rules" v-model="registerUserName" label="User name" required></v-text-field>
                                 </v-flex>
                                 <v-flex xs12>
-                                    <v-text-field v-model="registerUserPasswd" label="Password" type="password" required></v-text-field>
+                                    <v-text-field :rules="rules" v-model="registerUserPasswd" label="Password" type="password" required></v-text-field>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -60,6 +60,9 @@
 import { eventBus } from '../main';
 export default {
     data: () => ({
+        rules: [
+            v => !!v || 'can not empty'
+        ],
         dialog_login: false,
         dialog_register: false,
         loginUserName: '',
@@ -74,6 +77,11 @@ export default {
             const data = {
                 username: this.loginUserName,
                 password: this.loginUserPasswd
+            }
+
+            if (this.loginUserName == '' || this.loginUserPasswd == '') {
+                eventBus.$emit('LoginStatus', 0);
+                return
             }
             // console.log(this.loginUserName, this.loginUserPasswd)
             fetch('http://localhost:3000/login', {
@@ -95,7 +103,7 @@ export default {
                     // console.log('登入失敗 帳號或密碼錯誤')
                 }
             }).catch(function(err) {
-                // console.log(err);
+                console.log(err);
             })
         },
         submit() {
@@ -104,6 +112,11 @@ export default {
             const data = {
                 username: this.registerUserName,
                 password: this.registerUserPasswd
+            }
+
+            if (this.registerUserName == '' || this.registerUserPasswd == '') {
+                eventBus.$emit('RegisterStatus', 0);
+                return
             }
             // console.log(this.loginUserName, this.loginUserPasswd)
             fetch('http://localhost:3000/register', {
@@ -115,11 +128,11 @@ export default {
             }).then((jsonData) => {
                 if (jsonData.status == 1) {
                     // 註冊成功
-                    console.log('註冊成功')
+                    // console.log('註冊成功')
                     eventBus.$emit('RegisterStatus', 1);
                 } else {
                     // 註冊失敗
-                    console.log('註冊失敗 用戶已存在')
+                    // console.log('註冊失敗 用戶已存在')
                     eventBus.$emit('RegisterStatus', 0);
                 }
             }).catch(function(err) {
