@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <!-- <v-container> -->
     <v-flex xs12>
       <v-layout>
         <v-flex md3 xs11>
@@ -10,7 +10,7 @@
         </v-flex>
       </v-layout>
     </v-flex>
-  </v-container>
+  <!-- </v-container> -->
 </template>
 <script>
 export default {

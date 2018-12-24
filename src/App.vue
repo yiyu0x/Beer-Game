@@ -1,13 +1,14 @@
 <template>
   <v-app>
       <ToolBar/>
+      <v-container>
       <router-view></router-view>
+      </v-container>
   </v-app>
 </template>
 
 <script>
 import ToolBar from './components/ToolBar'
-// import ButtonBox from './components/ButtonBox'
 export default {
   name: 'App',
   components: {

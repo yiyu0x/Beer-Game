@@ -5,29 +5,29 @@ import Home from './views/Home.vue'
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
-      path: '/',
-      name: 'home',
-      component: Home
+    routes: [{
+        path: '/',
+        name: 'home',
+        component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
+        path: '/about',
+        name: 'about',
+        component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
     },
     {
-      path: '/lobby',
-      name: 'lobby',
-      component: () => import( /* webpackChunkName: "about" */ './views/Lobby.vue')
+        path: '/lobby',
+        name: 'lobby',
+        component: () => import( /* webpackChunkName: "about" */ './views/Lobby.vue')
     },
     {
-      path: '/game',
-      name: 'game',
-      component: () => import( /* webpackChunkName: "about" */ './views/Game.vue')
+        path: '/game',
+        name: 'game',
+        component: () => import( /* webpackChunkName: "about" */ './views/Game.vue')
     },
     {
-      path: '*',
-      redirect: '/'
+        path: '*',
+        redirect: '/'
     }
-  ]
+    ]
 })

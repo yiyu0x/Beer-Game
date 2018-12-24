@@ -11,11 +11,13 @@
   </v-toolbar>
 </template>
 <script>
+import { eventBus } from "../main";
 export default {
   data: () => ({}),
   methods: {
     logout () {
         localStorage.removeItem('token');
+        eventBus.$emit("LogOut", 1);
     }
   }
 };

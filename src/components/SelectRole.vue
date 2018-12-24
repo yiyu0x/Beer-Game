@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <!-- <v-container> -->
     <v-layout align-center row justify-center>
       <v-flex xs6 text-xs-center>
         <div>
@@ -18,5 +18,5 @@
         </div>
       </v-flex>
     </v-layout>
-  </v-container>
+  <!-- </v-container> -->
 </template>
