@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "eslint --fix src/*.js"
+    "lint": "eslint --fix src/*.js",
+    "api": "node server/app.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
