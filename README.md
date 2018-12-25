@@ -6,7 +6,7 @@ npm install
 ```
 ### Run api server
 ```
-npm run api
+npm run db
 ```
 ### Compiles and hot-reloads for development
 ```
