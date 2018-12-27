@@ -1,7 +1,5 @@
 <template>
-  <!-- <v-container> -->
   <div>
-    <v-layout row justify-center>
       <v-dialog v-model="dialog_login" persistent max-width="600px">
         <v-btn slot="activator" dark>登入</v-btn>
         <v-card>
@@ -33,8 +31,6 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-layout>
-    <v-layout row justify-center>
       <v-dialog v-model="dialog_register" persistent max-width="600px">
         <v-btn slot="activator" dark>註冊帳號</v-btn>
         <v-card>
@@ -71,9 +67,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-layout>
   </div>
-  <!-- </v-container> -->
 </template>
 <script>
 import { eventBus } from "../main";
