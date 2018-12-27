@@ -6,7 +6,6 @@
       <v-btn flat :to="{name: 'home'}">首頁</v-btn>
       <v-btn flat :to="{name: 'lobby'}">大廳</v-btn>
       <v-btn flat :to="{name: 'game'}">遊玩</v-btn>
-      <v-btn flat @click="logout">登出</v-btn>
       <v-menu>
       <v-btn
         transition="scale-transition"
@@ -31,7 +30,7 @@
 <script>
 import { eventBus } from "../main";
 export default {
-  data: function() {
+  data() {
     return {
       items: [
         { title: '登出', func: this.logout},
@@ -41,7 +40,6 @@ export default {
   },
   methods: {
     logout() {
-      // console.log('!!!')
       const isLogin = localStorage.getItem("token") == "ImLogin";
       if (isLogin) {
         this.$router.push({ path: "home" });
@@ -50,7 +48,7 @@ export default {
       }
     },
     showProfile() {
-      
+
     }
   }
 };
