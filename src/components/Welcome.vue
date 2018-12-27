@@ -3,10 +3,14 @@
     <v-container fill-height>
       <v-layout align-center>
         <v-flex>
-          <h3 class="display-3">啤酒遊戲</h3>
+          <h3 class="display-3">Who Is The King of Beer Games
+</h3>
           <span
             class="subheading"
-          >Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluisset molestiae id, ad semper lobortis cum. At impetus detraxit incorrupte usu, repudiare assueverit ex eum, ne nam essent vocent admodum.</span>
+          >由四個小組（一組1~2人）組成一條供應鏈
+擔任供應鏈中的工廠、配銷商、大盤商、零售商四個角色，模擬角色訂購商品
+當有缺貨或囤貨時會增加各自的成本
+最後將成本加總與其他供應鏈比較，成本最低的那一條供應鏈獲勝</span>
           <v-divider class="my-3"></v-divider>
           <div class="title mb-3">Check out our newest features!</div>
           <ButtonBox/>

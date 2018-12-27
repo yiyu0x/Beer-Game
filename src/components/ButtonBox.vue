@@ -21,7 +21,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" flat @click="dialog_login = false">關閉</v-btn>
-                    <v-btn color="blue darken-1" flat @click="login()">登入</v-btn>
+                    <v-btn color="blue darken-1" flat @click="login">登入</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
