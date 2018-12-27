@@ -10,7 +10,6 @@
 import AlertLogin from "../components/AlertLogin";
 import ButtonBox from "../components/ButtonBox";
 import Welcome from "../components/Welcome";
-
 export default {
   data: () => ({
     

@@ -6,7 +6,7 @@
       <v-btn flat :to="{name: 'home'}">首頁</v-btn>
       <v-btn flat :to="{name: 'lobby'}">大廳</v-btn>
       <v-btn flat :to="{name: 'game'}">遊玩</v-btn>
-      <v-btn flat :to="{name: 'home'}" @click="logout">登出</v-btn>
+      <v-btn flat @click="logout">登出</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -15,10 +15,11 @@ import { eventBus } from "../main";
 export default {
   data: () => ({}),
   methods: {
-    logout () {
+    logout() {
       const isLogin = localStorage.getItem("token") == "ImLogin";
       if (isLogin) {
-        localStorage.removeItem('token');
+        this.$router.push({ path: "home" });
+        localStorage.removeItem("token");
         eventBus.$emit("LogOut", 1);
       }
     }
