@@ -16,8 +16,11 @@ export default {
   data: () => ({}),
   methods: {
     logout () {
+      const isLogin = localStorage.getItem("token") == "ImLogin";
+      if (isLogin) {
         localStorage.removeItem('token');
         eventBus.$emit("LogOut", 1);
+      }
     }
   }
 };
