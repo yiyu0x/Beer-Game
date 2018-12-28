@@ -48,7 +48,7 @@ export default {
       }
     },
     showProfile() {
-
+        this.$router.push({ path: "profile" });
     }
   }
 };

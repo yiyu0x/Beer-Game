@@ -1,29 +1,40 @@
 <template>
-    <div>
-        <v-alert v-model="msg" :value="show" :color="color" outline>{{ msg }}</v-alert>
-    </div>
+    <!-- <div> -->
+<!--         <v-alert v-model="welcome_msg" :value="welcome_show" :color="color" outline>{{ welcome_msg }}</v-alert> -->
+        <!-- </div> -->
+        <!-- <SnackBar/> -->
+        <v-snackbar v-model="show" top>
+            {{ msg }}
+            <v-btn flat color="accent" @click.native="show = false">Close</v-btn>
+        </v-snackbar>
+    <!-- </div> -->
 </template>
 <script>
 import { eventBus } from "../main";
+// import SnackBar from "../components/SnackBar";
 export default {
     data() {
         return {
             show: false,
             color: "warning",
-            msg: "登入後即可開始遊玩"
+            msg: "登入後開始遊玩",
+            welcome_msg: "",
+            welcome_show: ""
         };
     },
     created() {
         const isLogin = localStorage.getItem("token") == "ImLogin";
         if (isLogin) {
+            this.show = true;
             this.msg = "已登入";
             this.color = "success";
             console.log('已登入')
         } else {
             eventBus.$on("LogOut", () => {
+                this.show = true;
                 this.color = "warning";
-                this.msg = "已登出，登入後即可開始遊玩";
-                console.log('已登出，登入後即可開始遊玩')
+                this.msg = "已登出";
+                console.log('已登出')
             });
             eventBus.$on("LoginStatus", status => {
                 this.show = true;
