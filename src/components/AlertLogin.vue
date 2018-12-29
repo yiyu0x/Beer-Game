@@ -11,6 +11,7 @@
 </template>
 <script>
 import { eventBus } from "../main";
+
 // import SnackBar from "../components/SnackBar";
 export default {
     data() {
@@ -29,6 +30,7 @@ export default {
             this.msg = "已登入";
             this.color = "success";
             console.log('已登入')
+            this.$router.push({ path: "lobby" });
         } else {
             eventBus.$on("LogOut", () => {
                 this.show = true;
@@ -41,6 +43,7 @@ export default {
                 if (status == 1) {
                     this.msg = "登入成功";
                     this.color = "success";
+                    this.$router.push({ path: "lobby" });    
                 } else {
                     this.msg = "登入失敗";
                     this.color = "error";
