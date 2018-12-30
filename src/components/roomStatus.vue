@@ -23,13 +23,11 @@
 export default {
     data() {
         return {
-            items: [
-                { title: 'Jason Oner' },
-                { title: 'Travis Howard' },
-                { title: 'Ali Connors' },
-                { title: 'Cindy Baker' },
-            ]
+            items: []
         }
+    },
+    created() {
+        this.$socket.emit('fetchOnlineClients');
     },
     sockets: {
         getOnlineClients(users) {

@@ -22,7 +22,7 @@ export default {
         }
     },
     created() {
-        this.$socket.emit('init', 'ggininder')
+        
     },
     components: {
         roomStatus,

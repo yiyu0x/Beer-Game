@@ -34,7 +34,7 @@ app.post('/login', (req, res) => {
                 res.send({ status: '0'})
             } else {
                 console.log('login succes')
-                res.send({ status: '1'})
+                res.send({ status: '1', user: UserName})
             }
         }
     })

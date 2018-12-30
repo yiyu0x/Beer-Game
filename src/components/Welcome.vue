@@ -21,12 +21,12 @@
     </v-responsive>
 </template>
 <script>
-import ButtonBox from "../components/ButtonBox";
+import ButtonBox from '../components/ButtonBox'
 export default {
     data: () => ({}),
     created() {},
     components: {
         ButtonBox
     }
-};
+}
 </script>

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <!-- <SnackBar/> -->
-    <AlertLogin/>
+    <!-- <AlertLogin/> -->
     <welcome/>
   </v-container>
 </template>

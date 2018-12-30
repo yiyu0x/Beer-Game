@@ -1,6 +1,7 @@
 <template>
   <v-app>
       <ToolBar/>
+      <AlertLogin/>
       <v-container>
       <router-view></router-view>
       </v-container>
@@ -9,10 +10,12 @@
 
 <script>
 import ToolBar from './components/ToolBar'
+import AlertLogin from './components/AlertLogin'
 export default {
   name: 'App',
   components: {
-    ToolBar
+    ToolBar,
+    AlertLogin
   },
   data () {
     return {

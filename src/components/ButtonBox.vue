@@ -88,14 +88,16 @@ export default {
                 .then(jsonData => {
                     if (jsonData.status == 1) {
                         // 登入成功
-                        localStorage.setItem("token", "ImLogin");
+                        // localStorage.setItem("token", "ImLogin");
+                        // localStorage.setItem("user", jsonData.user);
                         this.dialog_login = false;
-                        eventBus.$emit("LoginStatus", 1);
+                        console.log('emit --> LoginStatus')
+                        eventBus.$emit("LoginStatus", jsonData);
                         // console.log('登入成功')
                     } else {
                         // 登入失敗
-                        eventBus.$emit("LoginStatus", 0);
-                        // console.log('登入失敗 帳號或密碼錯誤')
+                        eventBus.$emit("LoginStatus", jsonData);
+                        console.log('登入失敗 帳號或密碼錯誤')
                     }
                 })
                 .catch(function(err) {
