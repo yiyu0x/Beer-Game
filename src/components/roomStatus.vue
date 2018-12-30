@@ -27,7 +27,7 @@ export default {
         }
     },
     created() {
-        this.$socket.emit('fetchOnlineClients');
+        // this.$socket.emit('fetchOnlineClients');
     },
     sockets: {
         getOnlineClients(users) {

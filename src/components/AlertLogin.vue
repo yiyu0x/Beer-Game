@@ -34,6 +34,8 @@ export default {
                 this.show = true;
                 console.log('已登出')
                 localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                this.$socket.emit('logout');
                 // this.$router.push({ path: "home" });
             });
             eventBus.$on("LoginStatus", (event) => {
@@ -43,7 +45,7 @@ export default {
                     this.color = "success";
                     localStorage.setItem("token", "ImLogin");
                     localStorage.setItem("user", event.user);
-                    console.log('登入成功!!')
+                    console.log('登入成功!!', event.user)
                     this.$socket.emit('init', event.user);
                     this.$router.push({ path: "lobby" });
                 } else {

@@ -91,7 +91,7 @@ export default {
                         // localStorage.setItem("token", "ImLogin");
                         // localStorage.setItem("user", jsonData.user);
                         this.dialog_login = false;
-                        console.log('emit --> LoginStatus')
+                        console.log('event.bus.emit --> LoginStatus')
                         eventBus.$emit("LoginStatus", jsonData);
                         // console.log('登入成功')
                     } else {
