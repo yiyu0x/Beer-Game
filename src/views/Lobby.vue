@@ -1,11 +1,15 @@
 <template>
     <div>
-        <roomStatus />
+        <v-layout row wrap>
+            <roomsStatus />
+            <usersStatus />
+        </v-layout>
     </div>
     <!-- <SelectRole/> -->
 </template>
 <script>
-import roomStatus from "../components/roomStatus";
+import roomsStatus from "../components/roomsStatus";
+import usersStatus from "../components/usersStatus";
 import SelectRole from "../components/SelectRole";
 export default {
 	  data() {
@@ -25,7 +29,8 @@ export default {
         
     },
     components: {
-        roomStatus,
+        usersStatus,
+        roomsStatus,
         SelectRole
     }
 };
