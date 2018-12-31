@@ -22,7 +22,9 @@ export default {
             this.show = true;
             this.msg = "已登入";
             this.color = "success";
-            this.$socket.emit('init', user);
+            this.$socket.emit('init', user, function (err) {
+                console.log(err)
+            });
             this.$router.push({ path: "lobby" });
             console.log('已登入', user)
         } else {
