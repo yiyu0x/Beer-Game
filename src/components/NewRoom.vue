@@ -35,9 +35,11 @@ export default {
     }),
     methods: {
         createRoom() {
-          this.$socket.emit('createRoom', this.roomName);
+          this.$socket.emit('createRoom', this.roomName, function (err) {
+            console.log(err)
+          });
           this.dialog_new_room = false;
-          // this.$router.push({ path: "room" });
+          this.$router.push({ path: "room" });
           // socket.emit('createRoom', 'hollw')
         }
     }

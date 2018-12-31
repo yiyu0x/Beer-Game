@@ -46,7 +46,9 @@ export default {
                     localStorage.setItem("token", "ImLogin");
                     localStorage.setItem("user", event.user);
                     console.log('登入成功!!', event.user)
-                    this.$socket.emit('init', event.user);
+                    this.$socket.emit('init', event.user, function (error) {
+                        console.log(error)
+                    });
                     this.$router.push({ path: "lobby" });
                 } else {
                     console.log('登入失敗')

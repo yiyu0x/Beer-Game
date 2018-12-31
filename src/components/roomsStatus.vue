@@ -41,6 +41,8 @@ export default {
             }, function(err) {
               console.log(err)
             })
+
+            this.$router.push({ path: "room" });
         }
     }
 }
