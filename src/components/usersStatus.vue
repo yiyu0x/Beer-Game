@@ -34,10 +34,10 @@ export default {
             this.items = users
             console.log('getOnlineClients', users)
         },
-        getRoomList(rooms) {
-            this.rooms = rooms
-            console.log('getRoomList', rooms)
-        }
+        // getRoomList(rooms) {
+        //     this.rooms = rooms
+        //     console.log('getRoomList', rooms)
+        // }
     }
 }
 </script>

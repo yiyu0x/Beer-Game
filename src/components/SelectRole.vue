@@ -1,22 +1,34 @@
 <template>
-  <!-- <v-container> -->
     <v-layout align-center row justify-center>
-      <v-flex xs6 text-xs-center>
+      <v-flex xs7 text-xs-center>
         <div>
-          <v-btn block color="primary">Retailer</v-btn>
+          <v-btn block color="primary" @click="chooseRoles('Retailer')" :disabled="rolesStatus[0]">Retailer</v-btn>
         </div>
         <div>
-          <v-btn block color="primary">Wholesaler</v-btn>
+          <v-btn block color="primary" @click="chooseRoles('Wholesaler')" :disabled="rolesStatus[1]">Wholesaler</v-btn>
         </div>
       </v-flex>
-      <v-flex xs6 text-xs-center>
+      <v-flex xs7 text-xs-center>
         <div>
-          <v-btn block color="primary">Distributer</v-btn>
+          <v-btn block color="primary" @click="chooseRoles('Distributer')" :disabled="rolesStatus[2]">Distributer</v-btn>
         </div>
         <div>
-          <v-btn block color="primary">Manufacturer</v-btn>
+          <v-btn block color="primary" @click="chooseRoles('Manufacturer')" :disabled="rolesStatus[3]">Manufacturer</v-btn>
         </div>
       </v-flex>
     </v-layout>
-  <!-- </v-container> -->
 </template>
+<script>
+  export default {
+    data() {
+      return {
+        rolesStatus : [false,false,false,false]
+      }
+    },
+    methods: {
+        chooseRoles(role) {
+          this.$socket.emit('chooseRoom', role)
+        }
+    }  
+  };
+</script>

@@ -1,5 +1,8 @@
 <template>
     <div>
+        <v-flex xs12 sm7 offset-sm1>
+            <NewRoom/>
+        </v-flex>
         <v-layout row wrap>
             <roomsStatus />
             <usersStatus />
@@ -10,7 +13,7 @@
 <script>
 import roomsStatus from "../components/roomsStatus";
 import usersStatus from "../components/usersStatus";
-import SelectRole from "../components/SelectRole";
+import NewRoom from "../components/NewRoom";
 export default {
 	  data() {
 	  	return {
@@ -31,7 +34,7 @@ export default {
     components: {
         usersStatus,
         roomsStatus,
-        SelectRole
+        NewRoom
     }
 };
 </script>
