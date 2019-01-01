@@ -1,11 +1,13 @@
 const { findUser } = require('./user')
 
-const createRoom = (roomName, userSocketID, username) => {
+const createRoom = (roomID, roomName, userSocketID, username) => {
     return {
+        roomID,
         roomName,
         userSocketIDs: [userSocketID],
         usernames: [username],
-        characters: []
+        characters: [],
+        orders: []
     }
 }
 
@@ -14,15 +16,17 @@ const deleteUserInRoom = (socket, rooms, users, id) => {
     let indexOfUser = findUser(users, id)
 
     // leave the room in socket
-    socket.leave(users[indexOfUser].roomName)
+    socket.leave(users[indexOfUser].roomID)
 
-    let indexOfRoom = findRoom(rooms, users[indexOfUser].roomName)
+    let indexOfRoom = findRoom(rooms, users[indexOfUser].roomID)
 
     let indexOfUserInRoom = rooms[indexOfRoom].userSocketIDs.indexOf(id)
 
     rooms[indexOfRoom].userSocketIDs.splice(indexOfUserInRoom, 1)
     rooms[indexOfRoom].usernames.splice(indexOfUserInRoom, 1)
     rooms[indexOfRoom].characters.splice(indexOfUserInRoom, 1)
+    rooms[indexOfRoom].characters.splice(indexOfUserInRoom, 1)
+    rooms[indexOfRoom].orders.splice(indexOfUserInRoom, 1)
 
     // 判斷是否該房間已經沒有人
     if (rooms[indexOfRoom].userSocketIDs.length == 0) {
@@ -37,13 +41,29 @@ const sendRooms = (io, rooms) => {
     io.emit('getRoomList', rooms)
 }
 
-const sendOccupiedCharacter = (socket, roomName, character) => {
-    socket.to(roomName).emit('getOccupiedCharacter', character)
+const sendOccupiedCharacter = (io, roomID, characters) => {
+
+    let roleStatus = {
+        'Manufacturer': false,
+        'Distributer': false,
+        'Wholesaler': false,
+        'Retailer': false
+    }
+
+    for (let i in characters) {
+        roleStatus[characters[i]] = true
+    }
+
+    io.to(roomID).emit('getOccupiedCharacter', roleStatus)
 }
 
-const findRoom = (rooms, roomName) => {
+const startGame = (io) => {
+    io.in(roomID).emit('startGame')
+}
+
+const findRoom = (rooms, roomID) => {
     for (let i in rooms) {
-        if (rooms[i].roomName == roomName) {
+        if (rooms[i].roomID == roomID) {
             return i
         }
     }
@@ -54,5 +74,6 @@ module.exports = {
     deleteUserInRoom,
     sendRooms,
     sendOccupiedCharacter,
+    startGame,
     findRoom
 }

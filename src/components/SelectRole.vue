@@ -27,7 +27,9 @@
     },
     methods: {
         chooseRoles(role) {
-          this.$socket.emit('chooseCharacter', role)
+          this.$socket.emit('chooseCharacter', role, function (err) {
+            console.log(err)
+          })
         }
     }  
   };
