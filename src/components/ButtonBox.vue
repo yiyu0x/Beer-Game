@@ -66,7 +66,6 @@ export default {
     }),
     methods: {
         login() {
-            // this.dialog_login = false;
             const data = {
                 username: this.loginUserName,
                 password: this.loginUserPasswd
@@ -76,7 +75,6 @@ export default {
                 eventBus.$emit("LoginStatus", 0);
                 return;
             }
-            // console.log(this.loginUserName, this.loginUserPasswd)
             fetch("http://localhost:3000/login", {
                     method: "post",
                     headers: { "Content-Type": "application/json" },
@@ -88,12 +86,9 @@ export default {
                 .then(jsonData => {
                     if (jsonData.status == 1) {
                         // 登入成功
-                        // localStorage.setItem("token", "ImLogin");
-                        // localStorage.setItem("user", jsonData.user);
                         this.dialog_login = false;
                         console.log('event.bus.emit --> LoginStatus')
                         eventBus.$emit("LoginStatus", jsonData);
-                        // console.log('登入成功')
                     } else {
                         // 登入失敗
                         eventBus.$emit("LoginStatus", jsonData);
@@ -116,7 +111,6 @@ export default {
                 eventBus.$emit("RegisterStatus", 0);
                 return;
             }
-            // console.log(this.loginUserName, this.loginUserPasswd)
             fetch("http://localhost:3000/register", {
                     method: "post",
                     headers: { "Content-Type": "application/json" },
@@ -132,7 +126,7 @@ export default {
                         eventBus.$emit("RegisterStatus", 1);
                     } else {
                         // 註冊失敗
-                        // console.log('註冊失敗 用戶已存在')
+                        console.log('註冊失敗 用戶已存在')
                         eventBus.$emit("RegisterStatus", 0);
                     }
                 })

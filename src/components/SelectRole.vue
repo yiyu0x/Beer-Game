@@ -19,6 +19,7 @@
     </v-layout>
 </template>
 <script>
+import { eventBus } from "../main";
 export default {
     data() {
         return {
@@ -27,14 +28,17 @@ export default {
     },
     sockets: {
         getRoomList(rooms) {
-            // this.rooms = rooms
             console.log('getRoomList', rooms)
+        },
+        getOccupiedCharacter(roles) {
+            console.log(roles)
         }
     },
     methods: {
         chooseRoles(role) {
-            this.$socket.emit('chooseCharacter', role)
-            //getRoomList
+            this.$socket.emit('chooseCharacter', role, function(err) {
+                eventBus.$emit("errorLog", err);
+            })
         }
     }
 };

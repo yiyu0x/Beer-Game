@@ -1,5 +1,4 @@
 <template>
-    <!-- <v-layout row> -->
     <v-flex xs12 sm4 offset-sm0>
         <v-card>
             <v-toolbar color="green" dark>
@@ -17,10 +16,8 @@
             </v-list>
         </v-card>
     </v-flex>
-    <!-- </v-layout> -->
 </template>
 <script>
-// import { userList } from "../main";
 export default {
     data() {
         return {

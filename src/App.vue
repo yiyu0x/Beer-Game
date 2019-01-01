@@ -25,16 +25,6 @@ export default {
     sockets: {
         connect: function() {
             console.log('socket connected')
-        },
-        getRoomList(rooms) {
-            // this.rooms = rooms
-            console.log('getRoomList', rooms)
-            // this.roomList = rooms
-        },
-        getOnlineClients(users) {
-            // this.items = users
-            console.log('getOnlineClients', users)
-            this.userList = users
         }
     }
 }
