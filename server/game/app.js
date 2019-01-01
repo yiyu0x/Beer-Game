@@ -125,7 +125,6 @@ io.on('connection', (socket) => {
             callback('User cannot choose multiple rooms')
             return
         }
-
         
         socket.join(data.roomID)
 
@@ -140,7 +139,7 @@ io.on('connection', (socket) => {
         sendRooms(io, rooms)
         
         // 通知同房的其他隊友哪些角色已經被選擇了
-        sendOccupiedCharacter(io, roomID, rooms[indexOfRoom].characters)
+        sendOccupiedCharacter(io, data.roomID, rooms[indexOfRoom].characters)
 
         console.log('Send Room list to client!\n', rooms, '\n')
     })
