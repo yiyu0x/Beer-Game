@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
         // 找到相同名, 就返回錯誤給使用者
         if (isSameName) {
             console.log('REJECT : User login with the same username : ', username)
-            callback('User login with the same username !')
+            callback('您已從其他裝置登入過此帳號')
             return
         }
 
@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
 
         if (onlineUsers[indexOfUser].roomName) {
             console.log('REJECT : User cannot open multiple rooms : ', onlineUsers[indexOfUser].username)
-            callback('User cannot open multiple rooms')
+            callback('一個人只能開一個房間')
             return
         }
 
@@ -122,7 +122,7 @@ io.on('connection', (socket) => {
 
         if (onlineUsers[indexOfUser].roomName) {
             console.log('REJECT : User cannot choose multiple rooms : ', data.username)
-            callback('User cannot choose multiple rooms')
+            callback('只能選擇進入一個房間喔')
             return
         }
         
@@ -154,7 +154,7 @@ io.on('connection', (socket) => {
         if (onlineUsers[indexOfUser].character) {
             console.log('REJECT => User can only choose one character in one game')
             console.log(`Current user : ${onlineUsers[indexOfUser].character}`)
-            callback(`REJECT : User can only choose one character in one game !\nCurrent user : ${onlineUsers[indexOfUser].character}`)
+            callback('只能選擇一個角色')
             return
         }
 
