@@ -13,6 +13,7 @@ Vue.use(Vuetify)
 // Vue.use(VueSocketio, 'http://localhost:6969/');
 Vue.config.productionTip = false
 export const eventBus = new Vue()
+export var userList = []
 
 new Vue({
     router,

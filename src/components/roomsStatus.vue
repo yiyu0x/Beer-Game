@@ -25,7 +25,7 @@ export default {
         }
     },
     created() {
-        // this.$socket.emit('fetchOnlineClients');
+        this.$socket.emit('fetchRoomList');
     },
     sockets: {
         getRoomList(rooms) {
@@ -41,7 +41,6 @@ export default {
             }, function(err) {
               console.log(err)
             })
-
             this.$router.push({ path: "room" });
         }
     }

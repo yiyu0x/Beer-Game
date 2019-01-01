@@ -40,7 +40,6 @@ export default {
           });
           this.dialog_new_room = false;
           this.$router.push({ path: "room" });
-          // socket.emit('createRoom', 'hollw')
         }
     }
 }
