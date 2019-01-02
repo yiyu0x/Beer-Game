@@ -4,7 +4,6 @@
             <NewRoom/>
         </v-flex>
         <v-layout row wrap>
-
             <roomsStatus />
             <usersStatus />
         </v-layout>
@@ -16,11 +15,11 @@ import roomsStatus from "../components/roomsStatus";
 import usersStatus from "../components/usersStatus";
 import NewRoom from "../components/NewRoom";
 export default {
-	  data() {
-	  	return {
+      data() {
+        return {
 
-	  	}
-	  },
+        }
+      },
     sockets: {
         connect: function() {
             console.log('socket connected')

@@ -22,10 +22,12 @@ new Vue({
 
 //check login status
 router.beforeEach((to, from, next)=>{
-    const isLogin = localStorage.getItem('token') == 'ImLogin' 
+    const isLogin = sessionStorage.getItem('token') == 'ImLogin' 
     if( isLogin ){
+        console.log('true')
         next()
     } else {
+        console.log('else')
         if( to.path !== '/')
             next('/')
         else

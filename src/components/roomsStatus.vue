@@ -5,7 +5,7 @@
                 <v-toolbar-title>遊戲房間</v-toolbar-title>
             </v-toolbar>
             <v-list>
-                <v-list-tile v-for="item in rooms" avatar @click="">
+                <v-list-tile v-for="(item,index) in rooms" avatar @click="" :key="index">
                     <v-list-tile-action>
                         <v-icon color="orange">star</v-icon>
                     </v-list-tile-action>
