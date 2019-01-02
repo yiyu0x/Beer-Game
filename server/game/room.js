@@ -6,8 +6,7 @@ const createRoom = (roomID, roomName, userSocketID, username) => {
         roomName,
         userSocketIDs: [userSocketID],
         usernames: [username],
-        characters: [],
-        orders: []
+        characters: []
     }
 }
 
@@ -57,7 +56,7 @@ const sendOccupiedCharacter = (io, roomID, characters) => {
     io.to(roomID).emit('getOccupiedCharacter', roleStatus)
 }
 
-const startGame = (io) => {
+const startGame = (io, roomID) => {
     io.in(roomID).emit('startGame')
 }
 
