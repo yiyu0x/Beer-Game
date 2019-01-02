@@ -179,7 +179,7 @@ io.on('connection', (socket) => {
         if (rooms[indexOfRoom].characters.length == 4) {
             startGame(io, roomID)
             // resources[roomID] = createResource()
-            // gameInit()
+            // gameInit(rooms[indexOfRoom])
         }
 
         console.log('Send Room list to client!\n', rooms, '\n')
@@ -251,8 +251,15 @@ io.on('connection', (socket) => {
         if (onlineUsers[indexOfUser]) {
             if (onlineUsers[indexOfUser].roomName) { // 使用者已進入房間
                 console.log('in room')
-                // 將離線的使用者踢出房間
+
                 rooms = deleteUserInRoom(socket, rooms, onlineUsers, socket.id)
+
+                sendRooms(io, rooms)
+
+                onlineUsers[indexOfUser].roomID = undefined
+                onlineUsers[indexOfUser].roomName = undefined
+                onlineUsers[indexOfUser].character = undefined
+
             } else {
                 callback('使用者尚未選擇房間')
             }
