@@ -215,7 +215,7 @@ io.on('connection', (socket) => {
             resources[roomID] = processDistributer(resources[roomID])
             resources[roomID] = processManufacturer(resources[roomID])
 
-            sendGameDataToClient(resources[roomID])
+            sendGameDataToClient(io, socket.id, onlineUsers, rooms, resources[roomID])
         }
 
     })

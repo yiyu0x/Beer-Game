@@ -201,6 +201,7 @@ const processManufacturer = (resource) => {
     resource.manufacturer.cost += (resource.manufacturer.stock + (resource.manufacturer.backlog * 2))
     return resource
 }
+
 const sendGameDataToClient = (io, id, users, rooms, resource) => {
 
     let indexOfUser = findUser(users, id)
