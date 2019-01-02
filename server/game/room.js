@@ -4,6 +4,7 @@ const createRoom = (roomID, roomName, userSocketID, username) => {
     return {
         roomID,
         roomName,
+        cache: 0,
         userSocketIDs: [userSocketID],
         usernames: [username],
         characters: []

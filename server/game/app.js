@@ -23,7 +23,7 @@ const {
     startGame
 } = require('./room')
 
-const { createResource } = require('./resource')
+// const { createResource } = require('./resource')
 
 var onlineUsers = []
 var rooms = []
@@ -184,7 +184,15 @@ io.on('connection', (socket) => {
 
     // socket.on('sendOutgoingOrder', (order) => {
     //     let indexOfUser = findUser(onlineUsers, socket.id)
-    //     let roomID = 
+
+    //     let role = onlineUsers[indexOfUser].character
+    //     let roomID = onlineUsers[indexOfUser].roomID
+
+    //     let indexOfRoom = findRoom(rooms, roomID)
+
+    //     let room = rooms[indexOfRoom]
+
+        
     // })
 
     socket.on('logout', () => {

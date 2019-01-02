@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "eslint --fix src/*.js",
-    "db": "node server/db/app.js"
+    "db": "node server/db/app.js",
+    "game": "node server/game/app.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
