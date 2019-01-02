@@ -1,5 +1,16 @@
+const fs = require('fs');
+const path = __dirname + '/passwd.json'
+const result = JSON.parse(fs.readFileSync(path));
+let mongodb_path = ''
+// read passwd file 
+if (result) {
+	mongodb_path = result.mongodb_path
+} else {
+	console.log('cant read db passwd file.')
+	return
+}
+//
 const mongoose = require('mongoose')
-let mongodb_path = 'mongodb://admin:yiyuoliver@35.194.134.133:27017/account'
 
 mongoose.connect(mongodb_path, { useNewUrlParser: true }, function(err, db) {
     if (err) {
