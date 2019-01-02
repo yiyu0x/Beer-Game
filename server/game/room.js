@@ -58,10 +58,6 @@ const startGame = (io, roomID) => {
     io.in(roomID).emit('startGame')
 }
 
-// const gameInit = (room) => {
-//     for (let i room.userSocketIDs)
-// }
-
 const findRoom = (rooms, roomID) => {
     for (let i in rooms) {
         if (rooms[i].roomID == roomID) {
@@ -76,6 +72,5 @@ module.exports = {
     sendRooms,
     sendOccupiedCharacter,
     startGame,
-    // gameInit,
     findRoom
 }

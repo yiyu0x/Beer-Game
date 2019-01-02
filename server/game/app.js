@@ -177,14 +177,19 @@ io.on('connection', (socket) => {
         // 當角色選滿時遊戲就開始
         if (rooms[indexOfRoom].characters.length == 4) {
             startGame(io, roomID)
-            // resources[roomID] = createResource()
-            // gameInit(rooms[indexOfRoom])
+            resources[roomID] = createResource()
         }
 
         console.log('Send Room list to client!\n', rooms, '\n')
     })
 
-    // socket.on('sendOutgoingOrder', (order) => {
+    socket.on('getRole', () => {
+        let indexOfUser = findUser(onlineUsers, socket.id)
+
+        socket.emit('receivedRole', onlineUsers[indexOfUser].character)
+    })
+
+    // socket.on('sendData', (order) => {
     //     let indexOfUser = findUser(onlineUsers, socket.id)
 
     //     let role = onlineUsers[indexOfUser].character
@@ -244,24 +249,11 @@ io.on('connection', (socket) => {
     // })
 
     socket.on('exitRoom', (callback) => {
-<<<<<<< HEAD
-
-        console.log('exitRoom !!!!!!!!!!!')
-
         let indexOfUser = findUser(onlineUsers, socket.id)
-
-        console.log(indexOfUser)
-
-=======
-        let indexOfUser = findUser(onlineUsers, socket.id)
->>>>>>> ff5f4f0b2aee6d6760295490c47a03bb99d39055
         if (onlineUsers[indexOfUser]) {
             // console.log('in room2')
             if (onlineUsers[indexOfUser].roomName) { // 使用者已進入房間
-<<<<<<< HEAD
-=======
                 // console.log('in room3')
->>>>>>> ff5f4f0b2aee6d6760295490c47a03bb99d39055
 
                 rooms = deleteUserInRoom(socket, rooms, onlineUsers, socket.id)
 
