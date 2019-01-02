@@ -77,6 +77,6 @@ module.exports = {
     sendRooms,
     sendOccupiedCharacter,
     startGame,
-    gameInit,
+    // gameInit,
     findRoom
 }
