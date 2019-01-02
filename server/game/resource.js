@@ -170,7 +170,10 @@ const processManufacturer = (resource) => {
 
     resource.manufacturer.incomingOrder = resource.distributer.outgoingOrder
 
-    if (resource.round & 1 == false) resource.manufacturer.stock += resource.manufacturer.receive//偶數拿貨
+    if (resource.round & 1 == false) {
+        resource.manufacturer.receive = resource.manufacturer.outgoingOrder
+        resource.manufacturer.stock += resource.manufacturer.receive//偶數拿貨
+    }
 
     let amount = resource.manufacturer.stock - (resource.manufacturer.incomingOrder + resource.manufacturer.backlog)
 
