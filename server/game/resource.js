@@ -231,7 +231,7 @@ const sendGameDataToClient = (io, id, users, rooms, resource) => {
         }
     }
 
-    io.sockets.socket(socketID).emit('updateGame', resData, resource.round)
+    io.to(socketID).emit('updateGame', resData, resource.round)
 
 }
 module.exports = {
