@@ -23,6 +23,8 @@ const {
     startGame
 } = require('./room')
 
+const { createResource } = require('./resource')
+
 var onlineUsers = []
 var rooms = []
 
@@ -125,7 +127,7 @@ io.on('connection', (socket) => {
             callback('只能選擇進入一個房間喔')
             return
         }
-        
+
         socket.join(data.roomID)
 
         onlineUsers[indexOfUser].roomName = data.roomName
@@ -134,10 +136,10 @@ io.on('connection', (socket) => {
         let indexOfRoom = findRoom(rooms, data.roomID)
         rooms[indexOfRoom].userSocketIDs.push(socket.id)
         rooms[indexOfRoom].usernames.push(socket.nickname)
-        
+
         // 及時向其他使用者發送房間的訊息
         sendRooms(io, rooms)
-        
+
         // 通知同房的其他隊友哪些角色已經被選擇了
         sendOccupiedCharacter(io, data.roomID, rooms[indexOfRoom].characters)
 
@@ -161,11 +163,11 @@ io.on('connection', (socket) => {
         onlineUsers[indexOfUser].character = character
         let roomID = onlineUsers[indexOfUser].roomID
 
-        
+
         let indexOfRoom = findRoom(rooms, roomID)
         let indexOfCharacter = rooms[indexOfRoom].userSocketIDs.indexOf(socket.id)
         rooms[indexOfRoom].characters[indexOfCharacter] = character
-        
+
         // 通知同房的其他隊友哪些角色已經被選擇了
         sendOccupiedCharacter(io, roomID, rooms[indexOfRoom].characters)
 
@@ -179,6 +181,11 @@ io.on('connection', (socket) => {
 
         console.log('Send Room list to client!\n', rooms, '\n')
     })
+
+    // socket.on('sendOutgoingOrder', (order) => {
+    //     let indexOfUser = findUser(onlineUsers, socket.id)
+    //     let roomID = 
+    // })
 
     socket.on('logout', () => {
         socket.emit('disconnect') // for logout
@@ -198,7 +205,7 @@ io.on('connection', (socket) => {
         let indexOfUser = findUser(onlineUsers, socket.id)
 
         // 是否為有效連線
-        if (onlineUsers[indexOfUser]) { 
+        if (onlineUsers[indexOfUser]) {
             if (onlineUsers[indexOfUser].roomName) {// 使用者已進入房間
                 console.log('in room')
                 // 將離線的使用者踢出房間
