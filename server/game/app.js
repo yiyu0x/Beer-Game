@@ -198,25 +198,22 @@ io.on('connection', (socket) => {
         let role = onlineUsers[indexOfUser].character
         let roomID = onlineUsers[indexOfUser].roomID
 
-        let resource = resources[roomID]
+        // let resource = resources[roomID]
 
-        resources[roomID] = setOutgoingOrder(role, resource, order)
+        resources[roomID] = setOutgoingOrder(role, resources[roomID], order)
 
-        resource = resources[roomID]
+        // resource = resources[roomID]
 
         if (++resource.cache == 4) { // 必須有四次
 
             resource.round++
             resource.cache = 0
 
-            processRetailer(resource)
-            // processWholesaler()
-            // processDistribu()
-            // processRetailer()
-
-            // if (resource.round % 2 == 0) {
-
-            // }
+            resources[roomID] = processRetailer(resources[roomID])
+            resources[roomID] = processWholesaler(resources[roomID])
+            resources[roomID] = processDistributer(resources[roomID])
+            resources[roomID] = processManufacturer(resources[roomID])
+            sendGameDataToClient(resources)
         }
 
         let indexOfRoom = findRoom(rooms, roomID)

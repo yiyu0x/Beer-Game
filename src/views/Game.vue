@@ -80,6 +80,8 @@ export default {
         	this.player = ''
         	this.btn_disabled = false
         	this.field_disabled = false
+        },
+        updateGame(data) {
 
         }
     },
