@@ -31,11 +31,15 @@ export default {
             }
         }
     },
+    create() {
+        this.$socket.emit('getOccupied');
+    },
     sockets: {
         getRoomList(rooms) {
             console.log('getRoomList', rooms)
         },
         getOccupiedCharacter(roles) {
+            // console.log('hello')
             this.rolesStatus.Manufacturer = roles.Manufacturer;
             this.rolesStatus.Distributer = roles.Distributer;
             this.rolesStatus.Wholesaler = roles.Wholesaler;

@@ -105,7 +105,7 @@ io.on('connection', (socket) => {
     socket.on('fetchRoomList', () => {
 
         console.log('Received addInToRoom event')
-
+        console.log(rooms)
         // 發送目前所有在線房間的資訊
         sendRooms(io, rooms)
 
@@ -244,6 +244,7 @@ io.on('connection', (socket) => {
     // })
 
     socket.on('exitRoom', (callback) => {
+<<<<<<< HEAD
 
         console.log('exitRoom !!!!!!!!!!!')
 
@@ -251,8 +252,16 @@ io.on('connection', (socket) => {
 
         console.log(indexOfUser)
 
+=======
+        let indexOfUser = findUser(onlineUsers, socket.id)
+>>>>>>> ff5f4f0b2aee6d6760295490c47a03bb99d39055
         if (onlineUsers[indexOfUser]) {
+            // console.log('in room2')
             if (onlineUsers[indexOfUser].roomName) { // 使用者已進入房間
+<<<<<<< HEAD
+=======
+                // console.log('in room3')
+>>>>>>> ff5f4f0b2aee6d6760295490c47a03bb99d39055
 
                 rooms = deleteUserInRoom(socket, rooms, onlineUsers, socket.id)
 

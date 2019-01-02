@@ -31,6 +31,7 @@ export default {
         getRoomList(rooms) {
             this.rooms = rooms
             console.log('getRoomList', rooms)
+            console.log(this.rooms)
         }
     },
     methods: {
