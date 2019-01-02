@@ -42,16 +42,16 @@
 export default {
     data() {
         return {
-            btn_disabled: false,
-            field_disabled: false,
-            role: 'Retailer',
+            btn_disabled: true,
+            field_disabled: true,
+            role: '',
             stock: '15',
             backlog: '0',
             imcoming: '0',
             received: '0',
             order: '',
             msg: '等待其他玩家加入中...',
-            player: ''
+            player: '剩餘4人'
 
         }
     },
@@ -77,12 +77,17 @@ export default {
         },
         startGame() {
         	this.msg = '玩家加入完畢 遊戲開始'
+        	this.player = ''
+        	this.btn_disabled = false
+        	this.field_disabled = false
+
         }
     },
     methods: {
         lock() {
             this.btn_disabled = true
             this.field_disabled = true
+            this.$socket.emit('sendData', this.order);
         }
     }
 };

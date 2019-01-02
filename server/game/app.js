@@ -251,9 +251,7 @@ io.on('connection', (socket) => {
     socket.on('exitRoom', (callback) => {
         let indexOfUser = findUser(onlineUsers, socket.id)
         if (onlineUsers[indexOfUser]) {
-            // console.log('in room2')
             if (onlineUsers[indexOfUser].roomName) { // 使用者已進入房間
-                // console.log('in room3')
 
                 rooms = deleteUserInRoom(socket, rooms, onlineUsers, socket.id)
 
