@@ -2,7 +2,10 @@
     <v-layout wrap>
         <v-flex xs12>
             <v-layout row wrap justify-center>
-                <h1>{{ role }}</h1>
+                <h1>{{ msg }} {{ player }}</h1>
+            </v-layout>
+            <v-layout row wrap justify-center>
+            	<h1>{{ role }}</h1>
             </v-layout>
             <v-layout row justify-center wrap>
                 <v-flex xs12 sm6 md3>
@@ -46,7 +49,9 @@ export default {
             backlog: '0',
             imcoming: '0',
             received: '0',
-            order: ''
+            order: '',
+            msg: '等待其他玩家加入中...',
+            player: ''
 
         }
     },
@@ -54,9 +59,24 @@ export default {
 
     },
     sockets: {
+    		getOccupiedCharacter(roles) {
+    			let counter = 0
+    			for(let ele in roles){
+    				if(roles[ele] == true)
+    					counter++
+    			}
+    			counter = 4 - counter
+    			this.player = '剩餘' + counter.toString() + '人'
+
+    			if (this.player == 4) {
+    				this.player = ''
+    			}
+    		},
         getInfo(users) {
             this.btn_disabled = false
-            // console.log('getOnlineClients', users)
+        },
+        startGame() {
+        	this.msg = '玩家加入完畢 遊戲開始'
         }
     },
     methods: {

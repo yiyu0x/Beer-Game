@@ -26,7 +26,6 @@ const deleteUserInRoom = (socket, rooms, users, id) => {
     rooms[indexOfRoom].usernames.splice(indexOfUserInRoom, 1)
     rooms[indexOfRoom].characters.splice(indexOfUserInRoom, 1)
     rooms[indexOfRoom].characters.splice(indexOfUserInRoom, 1)
-    rooms[indexOfRoom].orders.splice(indexOfUserInRoom, 1)
 
     // 判斷是否該房間已經沒有人
     if (rooms[indexOfRoom].userSocketIDs.length == 0) {
