@@ -20,9 +20,12 @@ const sendOnlineUsers = (io, onlineUsers) => {
 }
 
 const findUser = (users, id) => {
-
+    // console.log('user->', users)
+    // console.log('id->', id)
     for (let i in users) {
+        // console.log('in for:', i)    
         if (users[i].socketID == id) {
+            // console.log('return')
             return i
         }
     }

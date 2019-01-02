@@ -67,6 +67,7 @@ export default {
         });
 
         eventBus.$on("exitRoom", () => {
+            // console.log('!!!')
             this.$socket.emit('exitRoom', function(err) {
                 eventBus.$emit("errorLog", err);
             });
