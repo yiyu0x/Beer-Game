@@ -177,7 +177,7 @@ io.on('connection', (socket) => {
         // 當角色選滿時遊戲就開始
         if (rooms[indexOfRoom].characters.length == 4) {
             startGame(io, roomID)
-            resources[roomID] = createResource()
+            // resources[roomID] = createResource()
         }
 
         console.log('Send Room list to client!\n', rooms, '\n')
