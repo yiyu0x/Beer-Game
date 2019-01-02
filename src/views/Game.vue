@@ -56,9 +56,12 @@ export default {
         }
     },
     created() {
-
+    	this.$socket.emit('getRole');
     },
     sockets: {
+    		receivedRole(role) {
+    			this.role = role;
+    		},
     		getOccupiedCharacter(roles) {
     			let counter = 0
     			for(let ele in roles){
@@ -72,9 +75,6 @@ export default {
     				this.player = ''
     			}
     		},
-        getInfo(users) {
-            this.btn_disabled = false
-        },
         startGame() {
         	this.msg = '玩家加入完畢 遊戲開始'
         	this.player = ''
@@ -87,6 +87,7 @@ export default {
         lock() {
             this.btn_disabled = true
             this.field_disabled = true
+            if (this.order == '') this.order = 0
             this.$socket.emit('sendData', this.order);
         }
     }
