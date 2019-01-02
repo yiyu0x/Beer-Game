@@ -25,7 +25,12 @@ const {
 
 const {
     createResource,
-    setOutgoingOrder
+    setOutgoingOrder,
+    processDistributer,
+    processRetailer,
+    processWholesaler,
+    processManufacturer,
+    sendGameDataToClient
 } = require('./resource')
 
 var onlineUsers = []
@@ -198,27 +203,20 @@ io.on('connection', (socket) => {
         let role = onlineUsers[indexOfUser].character
         let roomID = onlineUsers[indexOfUser].roomID
 
-        // let resource = resources[roomID]
-
         resources[roomID] = setOutgoingOrder(role, resources[roomID], order)
 
-        // resource = resources[roomID]
+        if (++resources[roomID].cache == 4) { // 必須有四次
 
-        if (++resource.cache == 4) { // 必須有四次
-
-            resource.round++
-            resource.cache = 0
+            resources[roomID].round++
+            resources[roomID].cache = 0
 
             resources[roomID] = processRetailer(resources[roomID])
             resources[roomID] = processWholesaler(resources[roomID])
             resources[roomID] = processDistributer(resources[roomID])
             resources[roomID] = processManufacturer(resources[roomID])
-            sendGameDataToClient(resources)
+
+            sendGameDataToClient(resources[roomID])
         }
-
-        let indexOfRoom = findRoom(rooms, roomID)
-
-        let room = rooms[indexOfRoom]
 
     })
 

@@ -1,8 +1,10 @@
+const { findUser } = require('./user')
+const { findRoom } = require('./room')
+
 const createResource = () => {
     return {
         round: 1,
         cache: 0,
-        cost: 0,
         retailer: {
             stock: 15,
             cost: 0,
@@ -199,11 +201,44 @@ const processManufacturer = (resource) => {
     resource.manufacturer.cost += (resource.manufacturer.stock + (resource.manufacturer.backlog * 2))
     return resource
 }
-const sendGameDataToClient = (resources) => {
-    
-    // socket.emit('updateGame', )
+const sendGameDataToClient = (io, id, users, rooms, resource) => {
+
+    let indexOfUser = findUser(users, id)
+
+    let indexOfRoom = findRoom(rooms, users[indexOfUser].roomID)
+
+    let room = rooms[indexOfRoom]
+
+    let characters = room.characters
+
+    let socketID = ''
+    let resData = {}
+
+    for (let i in characters) {
+        if (characters[i] == 'Retailer') {
+            socketID = room.userSocketIDs[i]
+            resData = resource.retailer
+        } else if (characters[i] == 'Wholesaler') {
+            socketID = room.userSocketIDs[i]
+            resData = resource.wholesaler
+        } else if (characters[i] == 'Distributer') {
+            socketID = room.userSocketIDs[i]
+            resData = resource.distributer
+        } else if (characters[i] == 'Manufacturer') {
+            socketID = room.userSocketIDs[i]
+            resData = resource.manufacturer
+        }
+    }
+
+    io.sockets.socket(socketID).emit('updateGame', resData, resource.round)
+
 }
 module.exports = {
     createResource,
-    setOutgoingOrder
+    setOutgoingOrder,
+    processDistributer,
+    processManufacturer,
+    processRetailer,
+    processWholesaler,
+    sendGameDataToClient
 }
