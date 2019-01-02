@@ -203,7 +203,7 @@ io.on('connection', (socket) => {
         let role = onlineUsers[indexOfUser].character
         let roomID = onlineUsers[indexOfUser].roomID
 
-        resources[roomID] = setOutgoingOrder(role, resources[roomID], order)
+        resources[roomID] = setOutgoingOrder(role, resources[roomID], Number(order))
 
         if (++resources[roomID].cache == 4) { // 必須有四次
 
