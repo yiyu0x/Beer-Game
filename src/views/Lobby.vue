@@ -8,7 +8,6 @@
             <usersStatus />
         </v-layout>
     </div>
-    <!-- <SelectRole/> -->
 </template>
 <script>
 import roomsStatus from "../components/roomsStatus";

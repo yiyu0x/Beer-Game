@@ -66,6 +66,11 @@ export default {
             this.show = true;
         });
 
+        eventBus.$on("exitRoom", () => {
+            this.$socket.emit('exitRoom', function(err) {
+                eventBus.$emit("errorLog", err);
+            });
+        });
         eventBus.$on("errorLog", msg => {
             this.color = "error";
             this.msg = msg;

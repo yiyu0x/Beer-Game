@@ -33,4 +33,9 @@ router.beforeEach((to, from, next)=>{
         else
             next()
     }
+    if (from.path === '/game') {
+        eventBus.$emit("errorLog", '您已離開遊戲間');
+        eventBus.$emit("exitRoom");
+        console.log('您已離開遊戲間')
+    }
 })
