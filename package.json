@@ -12,6 +12,8 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.4.0",
+    "random-hash": "^4.0.1",
+    "socket.io": "^2.2.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vue-socket.io": "^3.0.4",

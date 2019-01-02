@@ -2,14 +2,13 @@ const createUser = (username, socketID) => {
     return {
         socketID,
         username,
+        roomID: undefined,
         roomName: undefined,
         character: undefined,
     }
 }
 
-const deleteUser = (users, id) => {
-    let indexOfUser = findUser(users, id)
-
+const deleteUser = (users, indexOfUser) => {
     // Fucking point : splice return the deleted element not the new array
     users.splice(indexOfUser, 1)
 
