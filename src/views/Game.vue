@@ -5,7 +5,10 @@
                 <h1>{{ msg }} {{ player }}</h1>
             </v-layout>
             <v-layout row wrap justify-center>
-            	<h1>{{ role }}</h1>
+                <h1>{{ role }}</h1>
+            </v-layout>
+            <v-layout row wrap justify-center>
+                <h1>{{ round }}</h1>
             </v-layout>
             <v-layout row justify-center wrap>
                 <v-flex xs12 sm6 md3>
@@ -35,6 +38,11 @@
                     <v-text-field v-model="received" label="上游實際出貨" box disabled></v-text-field>
                 </v-flex>
             </v-layout>
+            <v-layout row justify-center wrap>
+                <v-flex xs12 sm6 md3>
+                    <v-text-field v-model="cost" label="目前成本" box disabled></v-text-field>
+                </v-flex>
+            </v-layout>
         </v-flex>
     </v-layout>
 </template>
@@ -51,38 +59,52 @@ export default {
             received: '0',
             order: '',
             msg: '等待其他玩家加入中...',
-            player: '剩餘4人'
+            player: '剩餘4人',
+            cost: '0',
+            round: '第1期'
 
         }
     },
     created() {
-    	this.$socket.emit('getRole');
+        this.$socket.emit('getRole');
     },
     sockets: {
-    		receivedRole(role) {
-    			this.role = role;
-    		},
-    		getOccupiedCharacter(roles) {
-    			let counter = 0
-    			for(let ele in roles){
-    				if(roles[ele] == true)
-    					counter++
-    			}
-    			counter = 4 - counter
-    			this.player = '剩餘' + counter.toString() + '人'
+        receivedRole(role) {
+            this.role = role;
+        },
+        getOccupiedCharacter(roles) {
+            let counter = 0
+            for (let ele in roles) {
+                if (roles[ele] == true)
+                    counter++
+            }
+            counter = 4 - counter
+            this.player = '剩餘' + counter.toString() + '人'
 
-    			if (this.player == 4) {
-    				this.player = ''
-    			}
-    		},
+            if (this.player == 4) {
+                this.player = ''
+            }
+        },
         startGame() {
-        	this.msg = '玩家加入完畢 遊戲開始'
-        	this.player = ''
-        	this.btn_disabled = false
-        	this.field_disabled = false
+            this.msg = '玩家加入完畢 遊戲開始'
+            this.player = ''
+            this.btn_disabled = false
+            this.field_disabled = false
         },
         updateGame(data) {
-
+            let resource = data[0]
+            let round = data[1]
+            this.btn_disabled = false
+            this.field_disabled = false
+            this.stock = resource.stock
+            this.backlog = resource.backlog 
+            this.imcoming = resource.incomingOrder
+            this.received = resource.receive
+            this.cost = resource.cost
+            this.round = '第' + round + '期'
+            console.log('updateGame ')
+            console.log(resource)
+            console.log(round)
         }
     },
     methods: {

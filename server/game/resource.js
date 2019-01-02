@@ -43,7 +43,9 @@ const createResource = () => {
             sendOld: 0,
             receive: 0,
             incomingOrder: 0,
-            outgoingOrder: 0
+            outgoingOrder: 0,
+            produceNew: 0,
+            produceOld: 0
         },
     }
 }
@@ -51,6 +53,7 @@ const createResource = () => {
 const setOutgoingOrder = (role, resource, order) => {
     if (role == 'Manufacturer') {
         resource.manufacturer.outgoingOrder = order
+        console.log(resource.manufacturer.outgoingOrder)
     } else if (role == 'Distributer') {
         resource.distributer.outgoingOrder = order
     } else if (role == 'Wholesaler') {
@@ -65,27 +68,16 @@ const setOutgoingOrder = (role, resource, order) => {
 const processRetailer = (resource) => {
 
     resource.retailer.incomingOrder = Math.floor(Math.random() * 100)
-
-    if (resource.round & 1 == false) resource.retailer.stock += resource.retailer.receive//偶數拿貨
-
     let amount = resource.retailer.stock - (resource.retailer.incomingOrder + resource.retailer.backlog)
 
     if (amount < 0) {
-        if (resource.round & 1) {//奇數
-            resource.retailer.sendNew = resource.retailer.stock
-        } else {//偶數
-            //send old dont need to handle
-            resource.retailer.sendOld = resource.retailer.sendNew
-        }
+        // resource.retailer.sendNew = resource.retailer.stock
+        // resource.retailer.sendOld = resource.retailer.sendNew
         resource.retailer.stock = 0
         resource.retailer.backlog = Math.abs(amount)
     } else {
-        if (resource.round & 1) {//奇數
-            resource.retailer.sendNew = resource.retailer.incomingOrder + resource.retailer.backlog
-        } else {//偶數
-            //send old dont need to handle
-            resource.retailer.sendOld = resource.retailer.sendNew
-        }
+        // resource.retailer.sendNew = resource.retailer.incomingOrder + resource.retailer.backlog
+        // resource.retailer.sendOld = resource.retailer.sendNew
         resource.retailer.stock = amount
         resource.retailer.backlog = 0
     }
@@ -98,30 +90,23 @@ const processWholesaler = (resource) => {
 
     resource.wholesaler.incomingOrder = resource.retailer.outgoingOrder
 
-    if (resource.round & 1 == false) resource.wholesaler.stock += resource.wholesaler.receive//偶數拿貨
 
     let amount = resource.wholesaler.stock - (resource.wholesaler.incomingOrder + resource.wholesaler.backlog)
 
     if (amount < 0) {
-        if (resource.round & 1) {//奇數
-            resource.wholesaler.sendNew = resource.wholesaler.stock
-        } else {//偶數
-            //send old dont need to handle
-            //送貨給下游
-            resource.retailer.receive = resource.wholesaler.sendOld
-            resource.wholesaler.sendOld = resource.wholesaler.sendNew
-        }
+
+        resource.retailer.receive = resource.wholesaler.sendOld
+        resource.wholesaler.sendOld = resource.wholesaler.sendNew
+        resource.wholesaler.sendNew = resource.wholesaler.stock
+
         resource.wholesaler.stock = 0
         resource.wholesaler.backlog = Math.abs(amount)
     } else {
-        if (resource.round & 1) {//奇數
-            resource.wholesaler.sendNew = resource.wholesaler.incomingOrder + resource.wholesaler.backlog
-        } else {//偶數
-            //send old dont need to handle
-            //送貨給下游
-            resource.retailer.receive = resource.wholesaler.sendOld
-            resource.wholesaler.sendOld = resource.wholesaler.sendNew
-        }
+
+        resource.retailer.receive = resource.wholesaler.sendOld
+        resource.wholesaler.sendOld = resource.wholesaler.sendNew
+        resource.wholesaler.sendNew = resource.wholesaler.incomingOrder + resource.wholesaler.backlog
+
         resource.wholesaler.stock = amount
         resource.wholesaler.backlog = 0
     }
@@ -134,30 +119,24 @@ const processDistributer = (resource) => {
 
     resource.distributer.incomingOrder = resource.wholesaler.outgoingOrder
 
-    if (resource.round & 1 == false) resource.distributer.stock += resource.distributer.receive//偶數拿貨
+    // if (resource.round % 2 == 0) resource.distributer.stock += resource.distributer.receive//偶數拿貨
 
     let amount = resource.distributer.stock - (resource.distributer.incomingOrder + resource.distributer.backlog)
 
     if (amount < 0) {
-        if (resource.round & 1) {//奇數
-            resource.distributer.sendNew = resource.distributer.stock
-        } else {//偶數
-            //send old dont need to handle
-            //送貨給下游
-            resource.wholesaler.receive = resource.distributer.sendOld
-            resource.distributer.sendOld = resource.distributer.sendNew
-        }
+
+        resource.wholesaler.receive = resource.distributer.sendOld
+        resource.distributer.sendOld = resource.distributer.sendNew
+        resource.distributer.sendNew = resource.distributer.stock
+
         resource.distributer.stock = 0
         resource.distributer.backlog = Math.abs(amount)
     } else {
-        if (resource.round & 1) {//奇數
-            resource.distributer.sendNew = resource.distributer.incomingOrder + resource.distributer.backlog
-        } else {//偶數
-            //send old dont need to handle
-            //送貨給下游
-            resource.wholesaler.receive = resource.distributer.sendOld
-            resource.distributer.sendOld = resource.distributer.sendNew
-        }
+
+        resource.wholesaler.receive = resource.distributer.sendOld
+        resource.distributer.sendOld = resource.distributer.sendNew
+        resource.distributer.sendNew = resource.distributer.incomingOrder + resource.distributer.backlog
+
         resource.distributer.stock = amount
         resource.distributer.backlog = 0
     }
@@ -168,35 +147,38 @@ const processDistributer = (resource) => {
 
 const processManufacturer = (resource) => {
 
+    // 兩週後訂單到達
+    resource.manufacturer.receive = resource.manufacturer.produceOld
+    resource.manufacturer.stock += resource.manufacturer.receive //偶數拿貨
+    resource.manufacturer.produceOld = resource.manufacturer.produceNew
+    resource.manufacturer.produceNew = resource.manufacturer.outgoingOrder
+    //
     resource.manufacturer.incomingOrder = resource.distributer.outgoingOrder
-
-    if (resource.round & 1 == false) {
-        resource.manufacturer.receive = resource.manufacturer.outgoingOrder
-        resource.manufacturer.stock += resource.manufacturer.receive//偶數拿貨
-    }
-
     let amount = resource.manufacturer.stock - (resource.manufacturer.incomingOrder + resource.manufacturer.backlog)
 
     if (amount < 0) {
-        if (resource.round & 1) {//奇數
-            resource.manufacturer.sendNew = resource.manufacturer.stock
-        } else {//偶數
-            //send old dont need to handle
-            //送貨給下游
-            resource.distributer.receive = resource.manufacturer.sendOld
-            resource.manufacturer.sendOld = resource.manufacturer.sendNew
-        }
+        // if (resource.round % 2 != 0) {//奇數
+        resource.distributer.receive = resource.manufacturer.sendOld
+        resource.manufacturer.sendOld = resource.manufacturer.sendNew
+        resource.manufacturer.sendNew = resource.manufacturer.stock
+        // } else {//偶數
+        //send old dont need to handle
+        //送貨給下游
+        // resource.distributer.receive = resource.manufacturer.sendOld
+        // resource.manufacturer.sendOld = resource.manufacturer.sendNew
+        // }
         resource.manufacturer.stock = 0
         resource.manufacturer.backlog = Math.abs(amount)
     } else {
-        if (resource.round & 1) {//奇數
-            resource.manufacturer.sendNew = resource.manufacturer.incomingOrder + resource.manufacturer.backlog
-        } else {//偶數
-            //send old dont need to handle
-            //送貨給下游
-            resource.distributer.receive = resource.manufacturer.sendOld
-            resource.manufacturer.sendOld = resource.manufacturer.sendNew
-        }
+        // if (resource.round % 2 != 0) {//奇數
+
+        // } else {//偶數
+        //send old dont need to handle
+        //送貨給下游
+        resource.distributer.receive = resource.manufacturer.sendOld
+        resource.manufacturer.sendOld = resource.manufacturer.sendNew
+        resource.manufacturer.sendNew = resource.manufacturer.incomingOrder + resource.manufacturer.backlog
+        // }
         resource.manufacturer.stock = amount
         resource.manufacturer.backlog = 0
     }
