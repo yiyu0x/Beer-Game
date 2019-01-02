@@ -229,6 +229,7 @@ const sendGameDataToClient = (io, id, users, rooms, resource) => {
             socketID = room.userSocketIDs[i]
             resData = resource.manufacturer
         }
+        io.to(socketID).emit('updateGame', resData, resource.round)
     }
 
     io.to(socketID).emit('updateGame', resData, resource.round)
