@@ -180,7 +180,7 @@ io.on('connection', (socket) => {
         // 當角色選滿時遊戲就開始
         if (rooms[indexOfRoom].characters.length == 4) {
             startGame(io, roomID)
-            // resources[roomID] = createResource()
+            resources[roomID] = createResource()
         }
 
         console.log('Send Room list to client!\n', rooms, '\n')
@@ -206,31 +206,17 @@ io.on('connection', (socket) => {
 
         if (++resource.cache == 4) { // 必須有四次
 
-            if (resource.retailer.outgoingOrder != []) {
+            resource.round++
+            resource.cache = 0
 
-                // 每一回和所有的需求訂單都要加一
-                resource.retailer.outgoingOrder.forEach(element => {
-                    element.counter++
-                })
+            processRetailer(resource)
+            // processWholesaler()
+            // processDistribu()
+            // processRetailer()
 
-                if (resource.retailer.outgoingOrder[0] == 2) {
-                    resource.wholesaler.incomingOrder = resource.retailer.outgoingOrder.splice(0, 1)
+            // if (resource.round % 2 == 0) {
 
-                    getIncomingOrder(resource.wholesaler.incomingOrder)
-
-                    let amount = resource.wholesaler.stock - (resource.wholesaler.incomingOrder + resource.wholesaler.backlog)
-
-                    if (amount < 0) {
-                        resource.wholesaler.backlog = Math.abs(amount)
-                        sendToStock(resource.wholesaler.stock)
-                        resource.wholesaler.stock = 0
-                    } else {
-                        sendToStock(resource.wholesaler.stock)
-                        resource.wholesaler.backlog = 0
-                        resource.wholesaler.stock = amount
-                    }
-                }
-            }
+            // }
         }
 
         let indexOfRoom = findRoom(rooms, roomID)
