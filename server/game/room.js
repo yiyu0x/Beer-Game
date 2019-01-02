@@ -4,7 +4,6 @@ const createRoom = (roomID, roomName, userSocketID, username) => {
     return {
         roomID,
         roomName,
-        cache: 0,
         userSocketIDs: [userSocketID],
         usernames: [username],
         characters: []
@@ -58,6 +57,10 @@ const sendOccupiedCharacter = (io, roomID, characters) => {
 
 const startGame = (io, roomID) => {
     io.in(roomID).emit('startGame')
+}
+
+const gameInit = () => {
+    
 }
 
 const findRoom = (rooms, roomID) => {

@@ -27,6 +27,7 @@ const {
 
 var onlineUsers = []
 var rooms = []
+// var resources = []
 
 io.on('connection', (socket) => {
 
@@ -177,6 +178,8 @@ io.on('connection', (socket) => {
         // 當角色選滿時遊戲就開始
         if (rooms[indexOfRoom].characters.length == 4) {
             startGame(io, roomID)
+            // resources[roomID] = createResource()
+            // gameInit()
         }
 
         console.log('Send Room list to client!\n', rooms, '\n')
@@ -188,22 +191,78 @@ io.on('connection', (socket) => {
     //     let role = onlineUsers[indexOfUser].character
     //     let roomID = onlineUsers[indexOfUser].roomID
 
+    //     let resource = resources[roomID]
+
+    //     if (role == 'Manufacturer') {
+    //         console.log('hell no')
+    //     } else if (role == 'Distributer') {
+    //         resource.distributer.outgoingOrder.push({
+    //             order,
+    //             counter: 0
+    //         })
+    //     } else if (role == 'Wholesaler') {
+    //         resource.wholesaler.outgoingOrder.push({
+    //             order,
+    //             counter: 0
+    //         })
+    //     } else if (role == 'Retailer') {
+    //         resource.retailer.outgoingOrder.push({
+    //             order,
+    //             counter: 0
+    //         })
+    //     }
+
+    //     if (resource.retailer.outgoingOrder != []) {
+
+    //         // 每一回和所有的需求訂單都要加一
+    //         resource.retailer.outgoingOrder.forEach(element => {
+    //             element.counter++
+    //         })
+
+    //         if (resource.retailer.outgoingOrder[0] == 3) {
+    //             resource.wholesaler.incomingOrder = resource.retailer.outgoingOrder.splice(0, 1)
+
+    //             getIncomingOrder(resource.wholesaler.incomingOrder)
+
+    //             let amount = resource.wholesaler.stock - (resource.wholesaler.incomingOrder + resource.wholesaler.backlog)
+
+    //             if (amount < 0) {
+    //                 resource.wholesaler.backlog = Math.abs(amount)
+    //                 sendToStock(resource.wholesaler.stock)
+    //                 resource.wholesaler.stock = 0
+    //             } else {
+    //                 sendToStock(resource.wholesaler.stock)
+    //                 resource.wholesaler.backlog = 0
+    //                 resource.wholesaler.stock = amount
+    //             }
+    //         }
+    //     }
+
     //     let indexOfRoom = findRoom(rooms, roomID)
 
     //     let room = rooms[indexOfRoom]
 
-        
     // })
+
+    socket.on('exitRoom', (callback) => {
+
+        let indexOfUser = findUser(onlineUsers, socket.io)
+
+        if (onlineUsers[indexOfUser]) {
+            if (onlineUsers[indexOfUser].roomName) { // 使用者已進入房間
+                console.log('in room')
+                // 將離線的使用者踢出房間
+                rooms = deleteUserInRoom(socket, rooms, onlineUsers, socket.id)
+            } else {
+                callback('使用者尚未選擇房間')
+            }
+        }
+    })
 
     socket.on('logout', () => {
         socket.emit('disconnect') // for logout
         console.log('User logout : ', socket.id, '\n')
     })
-
-    // socket.on('sendOrder', (order) => {
-
-    //     let indexOfUser = findUser(onlineUsers, socket.id)
-    // })
 
     socket.on('disconnect', () => {
         console.log('User was disconnected')
@@ -214,7 +273,7 @@ io.on('connection', (socket) => {
 
         // 是否為有效連線
         if (onlineUsers[indexOfUser]) {
-            if (onlineUsers[indexOfUser].roomName) {// 使用者已進入房間
+            if (onlineUsers[indexOfUser].roomName) { // 使用者已進入房間
                 console.log('in room')
                 // 將離線的使用者踢出房間
                 rooms = deleteUserInRoom(socket, rooms, onlineUsers, socket.id)

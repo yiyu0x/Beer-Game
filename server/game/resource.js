@@ -1,32 +1,31 @@
 
 const createResource = () => {
     return {
+        round: 0,
+        cache: 0,
+        cost: 0,
         retailer: {
             stock: 15,
             backlog: 0,
-            inOrder: 0,
-            outOrder: 0,
-            counter: 2,
+            incomingOrder: 0,
+            outgoingOrder: [],
         },
         wholesaler: {
             stock: 15,
             backlog: 0,
-            inOrder: 0,
-            outOrder: 0,
-            counter: 2,
+            incomingOrder: 0,
+            outgoingOrder: [],
         },
         distributer: {
             stock: 15,
             backlog: 0,
-            inOrder: 0,
-            outOrder: 0,
-            counter: 2,
+            incomingOrder: 0,
+            outgoingOrder: [],
         },
         manufacturer: {
             stock: 15,
             backlog: 0,
-            inOrder: 0,
-            counter: 2,
+            incomingOrder: 0,
         },
     }
 }
