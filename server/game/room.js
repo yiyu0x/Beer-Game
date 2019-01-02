@@ -4,7 +4,6 @@ const createRoom = (roomID, roomName, userSocketID, username) => {
     return {
         roomID,
         roomName,
-        cache: 0,
         userSocketIDs: [userSocketID],
         usernames: [username],
         characters: []
@@ -26,7 +25,6 @@ const deleteUserInRoom = (socket, rooms, users, id) => {
     rooms[indexOfRoom].usernames.splice(indexOfUserInRoom, 1)
     rooms[indexOfRoom].characters.splice(indexOfUserInRoom, 1)
     rooms[indexOfRoom].characters.splice(indexOfUserInRoom, 1)
-    rooms[indexOfRoom].orders.splice(indexOfUserInRoom, 1)
 
     // 判斷是否該房間已經沒有人
     if (rooms[indexOfRoom].userSocketIDs.length == 0) {
@@ -59,6 +57,10 @@ const sendOccupiedCharacter = (io, roomID, characters) => {
 
 const startGame = (io, roomID) => {
     io.in(roomID).emit('startGame')
+}
+
+const gameInit = () => {
+    
 }
 
 const findRoom = (rooms, roomID) => {
