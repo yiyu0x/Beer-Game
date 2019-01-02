@@ -23,11 +23,14 @@ const {
     startGame
 } = require('./room')
 
-// const { createResource } = require('./resource')
+const {
+    createResource,
+    setOutgoingOrder
+} = require('./resource')
 
 var onlineUsers = []
 var rooms = []
-// var resources = []
+var resources = []
 
 io.on('connection', (socket) => {
 
@@ -189,64 +192,52 @@ io.on('connection', (socket) => {
         socket.emit('receivedRole', onlineUsers[indexOfUser].character)
     })
 
-    // socket.on('sendData', (order) => {
-    //     let indexOfUser = findUser(onlineUsers, socket.id)
+    socket.on('sendData', (order) => {
+        let indexOfUser = findUser(onlineUsers, socket.id)
 
-    //     let role = onlineUsers[indexOfUser].character
-    //     let roomID = onlineUsers[indexOfUser].roomID
+        let role = onlineUsers[indexOfUser].character
+        let roomID = onlineUsers[indexOfUser].roomID
 
-    //     let resource = resources[roomID]
+        let resource = resources[roomID]
 
-    //     if (role == 'Manufacturer') {
-    //         console.log('hell no')
-    //     } else if (role == 'Distributer') {
-    //         resource.distributer.outgoingOrder.push({
-    //             order,
-    //             counter: 0
-    //         })
-    //     } else if (role == 'Wholesaler') {
-    //         resource.wholesaler.outgoingOrder.push({
-    //             order,
-    //             counter: 0
-    //         })
-    //     } else if (role == 'Retailer') {
-    //         resource.retailer.outgoingOrder.push({
-    //             order,
-    //             counter: 0
-    //         })
-    //     }
+        resources[roomID] = setOutgoingOrder(role, resource, order)
 
-    //     if (resource.retailer.outgoingOrder != []) {
+        resource = resources[roomID]
 
-    //         // 每一回和所有的需求訂單都要加一
-    //         resource.retailer.outgoingOrder.forEach(element => {
-    //             element.counter++
-    //         })
+        if (++resource.cache == 4) { // 必須有四次
 
-    //         if (resource.retailer.outgoingOrder[0] == 3) {
-    //             resource.wholesaler.incomingOrder = resource.retailer.outgoingOrder.splice(0, 1)
+            if (resource.retailer.outgoingOrder != []) {
 
-    //             getIncomingOrder(resource.wholesaler.incomingOrder)
+                // 每一回和所有的需求訂單都要加一
+                resource.retailer.outgoingOrder.forEach(element => {
+                    element.counter++
+                })
 
-    //             let amount = resource.wholesaler.stock - (resource.wholesaler.incomingOrder + resource.wholesaler.backlog)
+                if (resource.retailer.outgoingOrder[0] == 2) {
+                    resource.wholesaler.incomingOrder = resource.retailer.outgoingOrder.splice(0, 1)
 
-    //             if (amount < 0) {
-    //                 resource.wholesaler.backlog = Math.abs(amount)
-    //                 sendToStock(resource.wholesaler.stock)
-    //                 resource.wholesaler.stock = 0
-    //             } else {
-    //                 sendToStock(resource.wholesaler.stock)
-    //                 resource.wholesaler.backlog = 0
-    //                 resource.wholesaler.stock = amount
-    //             }
-    //         }
-    //     }
+                    getIncomingOrder(resource.wholesaler.incomingOrder)
 
-    //     let indexOfRoom = findRoom(rooms, roomID)
+                    let amount = resource.wholesaler.stock - (resource.wholesaler.incomingOrder + resource.wholesaler.backlog)
 
-    //     let room = rooms[indexOfRoom]
+                    if (amount < 0) {
+                        resource.wholesaler.backlog = Math.abs(amount)
+                        sendToStock(resource.wholesaler.stock)
+                        resource.wholesaler.stock = 0
+                    } else {
+                        sendToStock(resource.wholesaler.stock)
+                        resource.wholesaler.backlog = 0
+                        resource.wholesaler.stock = amount
+                    }
+                }
+            }
+        }
 
-    // })
+        let indexOfRoom = findRoom(rooms, roomID)
+
+        let room = rooms[indexOfRoom]
+
+    })
 
     socket.on('exitRoom', (callback) => {
         let indexOfUser = findUser(onlineUsers, socket.id)

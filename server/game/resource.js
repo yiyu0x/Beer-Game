@@ -1,7 +1,7 @@
 
 const createResource = () => {
     return {
-        round: 0,
+        round: 1,
         cache: 0,
         cost: 0,
         retailer: {
@@ -30,7 +30,31 @@ const createResource = () => {
     }
 }
 
+const setOutgoingOrder = (role, resource, order) => {
+    if (role == 'Manufacturer') {
+        console.log('hell no')
+    } else if (role == 'Distributer') {
+        resource.distributer.outgoingOrder.push({
+            order,
+            counter: 0
+        })
+    } else if (role == 'Wholesaler') {
+        resource.wholesaler.outgoingOrder.push({
+            order,
+            counter: 0
+        })
+    } else if (role == 'Retailer') {
+        resource.retailer.outgoingOrder.push({
+            order,
+            counter: 0
+        })
+    }
+
+    return resource
+}
+
 module.exports = {
-    createResource
+    createResource,
+    setOutgoingOrder
 }
 
