@@ -40,10 +40,10 @@ export default {
   },
   methods: {
     logout() {
-      const isLogin = localStorage.getItem("token") == "ImLogin";
+      const isLogin = sessionStorage.getItem("token") == "ImLogin";
       if (isLogin) {
         this.$router.push({ path: "home" });
-        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
         eventBus.$emit("LogOut", 1);
       }
     },

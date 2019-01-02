@@ -15,9 +15,9 @@ export default {
         };
     },
     created() {
-        const isLogin = localStorage.getItem("token") == "ImLogin";
+        const isLogin = sessionStorage.getItem("token") == "ImLogin";
         if (isLogin) {
-            let user = localStorage.getItem("user");
+            let user = sessionStorage.getItem("user");
             this.show = true;
             this.msg = "已登入";
             this.color = "success";
@@ -32,8 +32,8 @@ export default {
             this.msg = "已登出";
             this.show = true;
             console.log('已登出')
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
+            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("user");
             this.$socket.emit('logout');
         });
         eventBus.$on("LoginStatus", event => {
@@ -41,8 +41,8 @@ export default {
                 this.show = true;
                 this.msg = "登入成功";
                 this.color = "success";
-                localStorage.setItem("token", "ImLogin");
-                localStorage.setItem("user", event.user);
+                sessionStorage.setItem("token", "ImLogin");
+                sessionStorage.setItem("user", event.user);
                 console.log('登入成功!!', event.user)
                 this.$socket.emit('init', event.user, function(err) {
                     eventBus.$emit("errorLog", err);

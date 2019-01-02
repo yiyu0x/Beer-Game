@@ -2,7 +2,7 @@
     <v-container fill-height fluid grid-list-xl>
         <v-layout justify-center wrap>
             <v-flex xs12 md8>
-                <material-card color="green" title="Edit Profile" text="Complete your profile">
+                <!-- <material-card color="green" title="Edit Profile" text="Complete your profile"> -->
                     <v-form>
                         <v-container py-0>
                             <v-layout wrap>
@@ -29,10 +29,10 @@
                             </v-layout>
                         </v-container>
                     </v-form>
-                </material-card>
+                <!-- </material-card> -->
             </v-flex>
             <v-flex xs12 md4>
-                <material-card class="v-card-profile">
+                <!-- <material-card class="v-card-profile"> -->
                     <v-avatar slot="offset" class="mx-auto d-block" size="130">
                         <img
               src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
@@ -44,7 +44,7 @@
                             <p class="card-description font-weight-light">Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...</p>
                             <v-btn color="success" round class="font-weight-light">Follow</v-btn>
                         </v-card-text>
-                </material-card>
+                <!-- </material-card> -->
             </v-flex>
         </v-layout>
     </v-container>
