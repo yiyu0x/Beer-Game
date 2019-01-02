@@ -109,7 +109,7 @@ io.on('connection', (socket) => {
         // 發送目前所有在線房間的資訊
         sendRooms(io, rooms)
 
-        console.log('Send Room list to client!\n', onlineUsers.map((user) => user.username))
+        console.log('Send Room list to client!\n', rooms)
     })
 
     // 接收客戶端所選擇房間的資訊
@@ -163,7 +163,6 @@ io.on('connection', (socket) => {
 
         onlineUsers[indexOfUser].character = character
         let roomID = onlineUsers[indexOfUser].roomID
-
 
         let indexOfRoom = findRoom(rooms, roomID)
         let indexOfCharacter = rooms[indexOfRoom].userSocketIDs.indexOf(socket.id)
@@ -246,15 +245,16 @@ io.on('connection', (socket) => {
 
     socket.on('exitRoom', (callback) => {
 
-        let indexOfUser = findUser(onlineUsers, socket.io)
+        console.log('exitRoom !!!!!!!!!!!')
+
+        let indexOfUser = findUser(onlineUsers, socket.id)
+
+        console.log(indexOfUser)
 
         if (onlineUsers[indexOfUser]) {
             if (onlineUsers[indexOfUser].roomName) { // 使用者已進入房間
-                console.log('in room')
 
                 rooms = deleteUserInRoom(socket, rooms, onlineUsers, socket.id)
-
-                sendRooms(io, rooms)
 
                 onlineUsers[indexOfUser].roomID = undefined
                 onlineUsers[indexOfUser].roomName = undefined
@@ -264,6 +264,16 @@ io.on('connection', (socket) => {
                 callback('使用者尚未選擇房間')
             }
         }
+    })
+
+    socket.on('getOccupied', () => {
+
+        let indexOfUser = findUser(onlineUsers, socket.id)
+
+        let roomID = onlineUsers[indexOfUser].roomID
+        let indexOfRoom = findRoom(rooms, roomID)
+
+        sendOccupiedCharacter(io, roomID, rooms[indexOfRoom].characters)
     })
 
     socket.on('logout', () => {
