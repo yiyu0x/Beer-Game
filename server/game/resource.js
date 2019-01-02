@@ -50,7 +50,7 @@ const createResource = () => {
 
 const setOutgoingOrder = (role, resource, order) => {
     if (role == 'Manufacturer') {
-        console.log('hell no')
+        resource.manufacturer.outgoingOrder = order
     } else if (role == 'Distributer') {
         resource.distributer.outgoingOrder = order
     } else if (role == 'Wholesaler') {
@@ -231,9 +231,6 @@ const sendGameDataToClient = (io, id, users, rooms, resource) => {
         }
         io.to(socketID).emit('updateGame', resData, resource.round)
     }
-
-    io.to(socketID).emit('updateGame', resData, resource.round)
-
 }
 module.exports = {
     createResource,
