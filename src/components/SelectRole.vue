@@ -47,6 +47,7 @@ export default {
             this.$socket.emit('chooseCharacter', role, function(err) {
                 eventBus.$emit("errorLog", err);
             })
+            this.$router.push({ path: "game" });
         }
     }
 };

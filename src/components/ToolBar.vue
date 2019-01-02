@@ -1,6 +1,7 @@
 <template>
   <v-toolbar>
-    <v-toolbar-title>啤酒遊戲</v-toolbar-title>
+    <v-toolbar-title :to="{name: 'home'}">啤酒遊戲</v-toolbar-title>
+    <!-- <v-btn flat :to="{name: 'home'}">啤酒遊戲</v-btn> -->
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <v-btn flat :to="{name: 'home'}">首頁</v-btn>

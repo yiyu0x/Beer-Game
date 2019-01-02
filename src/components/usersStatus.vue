@@ -5,7 +5,7 @@
                 <v-toolbar-title>在線用戶</v-toolbar-title>
             </v-toolbar>
             <v-list>
-                <v-list-tile v-for="item in items" avatar @click="">
+                <v-list-tile v-for="(item, index) in items" avatar @click="" :key="index">
                     <v-list-tile-action>
                         <v-icon color="green">star</v-icon>
                     </v-list-tile-action>
