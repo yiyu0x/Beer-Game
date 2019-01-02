@@ -58,7 +58,7 @@ export default {
         eventBus.$on("RegisterStatus", status => {
             if (status == 1) {
                 this.msg = "註冊成功";
-                this.color = "error";
+                this.color = "success";
             } else {
                 this.msg = "註冊失敗";
                 this.color = "error";
