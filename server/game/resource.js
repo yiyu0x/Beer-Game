@@ -207,7 +207,7 @@ const sendGameDataToClient = (io, id, users, rooms, resource) => {
     }
 
     // 12 期就結束
-    if (resource.round == 2) {
+    if (resource.round == 6) {
 
         let gamingResult = []
 

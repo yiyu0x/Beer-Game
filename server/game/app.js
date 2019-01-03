@@ -220,7 +220,7 @@ io.on('connection', (socket) => {
             sendGameDataToClient(io, socket.id, onlineUsers, rooms, resources[roomID])
 
             // 將該房間所佔用的遊戲資源給釋放
-            if (resources[roomID].round == 1)
+            if (resources[roomID].round == 6)
                 resources[roomID] = undefined
         }
 
