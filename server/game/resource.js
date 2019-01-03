@@ -1,5 +1,9 @@
-const { findUser } = require('./user')
-const { findRoom } = require('./room')
+const {
+    findUser
+} = require('./user')
+const {
+    findRoom
+} = require('./room')
 
 const createResource = () => {
     return {
@@ -203,7 +207,7 @@ const sendGameDataToClient = (io, id, users, rooms, resource) => {
     }
 
     // 12 期就結束
-    if (resource.round == 12) {
+    if (resource.round == 2) {
 
         let gamingResult = []
 
@@ -239,8 +243,8 @@ const sendGameDataToClient = (io, id, users, rooms, resource) => {
             return b.cost - a.cost
         })
 
-        
-        
+
+
         io.to(users[indexOfUser].roomID).emit('gameover', gamingResult)
 
     }

@@ -91,7 +91,9 @@ io.on('connection', (socket) => {
         }
 
         onlineUsers[indexOfUser].roomName = roomName
-        onlineUsers[indexOfUser].roomID = randomHash.generateHash({ length: 16 })
+        onlineUsers[indexOfUser].roomID = randomHash.generateHash({
+            length: 16
+        })
 
         socket.join(onlineUsers[indexOfUser].roomID)
 
@@ -126,7 +128,7 @@ io.on('connection', (socket) => {
         console.log('Received chooseRoom event : ', data.roomID)
 
         let indexOfUser = findUser(onlineUsers, socket.id)
-        
+
         console.log('\nonlineUsers', onlineUsers)
         console.log('onlineUsers[indexOfUser]', onlineUsers[indexOfUser])
         console.log('onlineUsers[indexOfUser].roomName', onlineUsers[indexOfUser].roomName, '\n')
@@ -218,7 +220,7 @@ io.on('connection', (socket) => {
             sendGameDataToClient(io, socket.id, onlineUsers, rooms, resources[roomID])
 
             // 將該房間所佔用的遊戲資源給釋放
-            if (resources[roomID].round == 12) 
+            if (resources[roomID].round == 1)
                 resources[roomID] = undefined
         }
 
@@ -294,4 +296,3 @@ io.on('connection', (socket) => {
 server.listen(6969, () => {
     console.log('Server is up on port 6969 !\n')
 })
-
