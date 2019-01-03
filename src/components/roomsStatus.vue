@@ -7,10 +7,12 @@
       <v-list>
         <v-list-tile v-for="(item,index) in rooms" avatar :key="index">
           <v-list-tile-action>
-            <v-icon color="orange">star</v-icon>
+            <v-icon v-if="item.usernames.length < 4" color="orange">label</v-icon>
+            <v-icon v-else color="red">pan_tool</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title v-text="item.roomName" @click="selectRoom(item)"></v-list-tile-title>
+            <v-list-tile-title v-if="item.usernames.length < 4" v-text="item.roomName" @click="selectRoom(item)"></v-list-tile-title>
+            <v-list-tile-title v-else v-text="item.roomName"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>

@@ -78,10 +78,10 @@ export default {
   }),
   methods: {
     login() {
-      const login_path = "http://35.194.134.133:3000/login";
+      // const login_path = "http://yiyu0x.tk:3000/login";
       
 
-      // const login_path = 'http://localhost:3000/login'
+      const login_path = 'http://localhost:3000/login'
       // const register_path = 'http://localhost:3000/register'
 
       const data = {
@@ -118,7 +118,7 @@ export default {
         });
     },
     submit() {
-      const register_path = "http://35.194.134.133:3000/register";
+      const register_path = "http://localhost:3000/register";
       this.dialog_register = false;
 
       const data = {
