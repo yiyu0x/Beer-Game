@@ -1,10 +1,17 @@
 const { Mongo, db } = require('./db_config')
 const express = require('express')
+var fs = require('fs')
+var https = require('https')
 const app = express()
 const bodyParser = require('body-parser')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+https.createServer({
+  key: fs.readFileSync(__dirname + '/server.key'),
+  cert: fs.readFileSync(__dirname + '/server.cert')
+}, app)
 
 //CORS fixed
 app.all('*', function (req, res, next) {
