@@ -6,7 +6,7 @@ import router from './router'
 import VueSocketIO from 'vue-socket.io'
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: 'http://localhost:6969',
+    connection: 'http://yiyu0x.tk:6969',
 }))
 
 Vue.use(Vuetify)
@@ -21,14 +21,14 @@ new Vue({
 }).$mount('#app')
 
 //check login status
-router.beforeEach((to, from, next)=>{
-    const isLogin = sessionStorage.getItem('token') == 'ImLogin' 
-    if( isLogin ){
+router.beforeEach((to, from, next) => {
+    const isLogin = sessionStorage.getItem('token') == 'ImLogin'
+    if (isLogin) {
         console.log('true')
         next()
     } else {
         console.log('else')
-        if( to.path !== '/')
+        if (to.path !== '/')
             next('/')
         else
             next()
