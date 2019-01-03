@@ -6,7 +6,7 @@ import router from './router'
 import VueSocketIO from 'vue-socket.io'
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: 'http://localhost:6969',
+    connection: 'http://35.194.134.133:6969'
 }))
 
 Vue.use(Vuetify)
@@ -38,7 +38,7 @@ router.beforeEach((to, from, next) => {
         eventBus.$emit('exitRoom')
         console.log('您已離開遊戲間')
     }
-
+    //from room to other page (except game) --> exit room
     if (from.path === '/room' && to.path !== '/game') {
         eventBus.$emit('errorLog', '您已離開遊戲間')
         eventBus.$emit('exitRoom')
