@@ -71,13 +71,9 @@ const processRetailer = (resource) => {
     let amount = resource.retailer.stock - (resource.retailer.incomingOrder + resource.retailer.backlog)
 
     if (amount < 0) {
-        // resource.retailer.sendNew = resource.retailer.stock
-        // resource.retailer.sendOld = resource.retailer.sendNew
         resource.retailer.stock = 0
         resource.retailer.backlog = Math.abs(amount)
     } else {
-        // resource.retailer.sendNew = resource.retailer.incomingOrder + resource.retailer.backlog
-        // resource.retailer.sendOld = resource.retailer.sendNew
         resource.retailer.stock = amount
         resource.retailer.backlog = 0
     }
@@ -119,8 +115,6 @@ const processDistributer = (resource) => {
 
     resource.distributer.incomingOrder = resource.wholesaler.outgoingOrder
 
-    // if (resource.round % 2 == 0) resource.distributer.stock += resource.distributer.receive//偶數拿貨
-
     let amount = resource.distributer.stock - (resource.distributer.incomingOrder + resource.distributer.backlog)
 
     if (amount < 0) {
@@ -152,33 +146,23 @@ const processManufacturer = (resource) => {
     resource.manufacturer.stock += resource.manufacturer.receive //偶數拿貨
     resource.manufacturer.produceOld = resource.manufacturer.produceNew
     resource.manufacturer.produceNew = resource.manufacturer.outgoingOrder
-    //
     resource.manufacturer.incomingOrder = resource.distributer.outgoingOrder
+
     let amount = resource.manufacturer.stock - (resource.manufacturer.incomingOrder + resource.manufacturer.backlog)
 
     if (amount < 0) {
-        // if (resource.round % 2 != 0) {//奇數
         resource.distributer.receive = resource.manufacturer.sendOld
         resource.manufacturer.sendOld = resource.manufacturer.sendNew
         resource.manufacturer.sendNew = resource.manufacturer.stock
-        // } else {//偶數
-        //send old dont need to handle
-        //送貨給下游
-        // resource.distributer.receive = resource.manufacturer.sendOld
-        // resource.manufacturer.sendOld = resource.manufacturer.sendNew
-        // }
+
         resource.manufacturer.stock = 0
         resource.manufacturer.backlog = Math.abs(amount)
     } else {
-        // if (resource.round % 2 != 0) {//奇數
-
-        // } else {//偶數
-        //send old dont need to handle
         //送貨給下游
         resource.distributer.receive = resource.manufacturer.sendOld
         resource.manufacturer.sendOld = resource.manufacturer.sendNew
         resource.manufacturer.sendNew = resource.manufacturer.incomingOrder + resource.manufacturer.backlog
-        // }
+
         resource.manufacturer.stock = amount
         resource.manufacturer.backlog = 0
     }
@@ -215,8 +199,54 @@ const sendGameDataToClient = (io, id, users, rooms, resource) => {
             resData = resource.manufacturer
         }
         io.to(socketID).emit('updateGame', resData, resource.round)
+
     }
+
+    // 12 期就結束
+    if (resource.round == 12) {
+
+        let gamingResult = []
+
+        for (let i in characters) {
+            if (characters[i] == 'Retailer') {
+                gamingResult.push({
+                    username: room.usernames[i],
+                    role: characters[i],
+                    cost: resource.retailer.cost
+                })
+            } else if (characters[i] == 'Wholesaler') {
+                gamingResult.push({
+                    username: room.usernames[i],
+                    role: characters[i],
+                    cost: resource.wholesaler.cost
+                })
+            } else if (characters[i] == 'Distributer') {
+                gamingResult.push({
+                    username: room.usernames[i],
+                    role: characters[i],
+                    cost: resource.distributer.cost
+                })
+            } else if (characters[i] == 'Manufacturer') {
+                gamingResult.push({
+                    username: room.usernames[i],
+                    role: characters[i],
+                    cost: resource.manufacturer.cost
+                })
+            }
+        }
+
+        gamingResult.sort((a, b) => {
+            return b.cost - a.cost
+        })
+
+        
+        
+        io.to(users[indexOfUser].roomID).emit('gameover', gamingResult)
+
+    }
+
 }
+
 module.exports = {
     createResource,
     setOutgoingOrder,
@@ -224,5 +254,5 @@ module.exports = {
     processManufacturer,
     processRetailer,
     processWholesaler,
-    sendGameDataToClient
+    sendGameDataToClient,
 }

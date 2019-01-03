@@ -30,7 +30,7 @@ const {
     processRetailer,
     processWholesaler,
     processManufacturer,
-    sendGameDataToClient
+    sendGameDataToClient,
 } = require('./resource')
 
 var onlineUsers = []
@@ -126,7 +126,7 @@ io.on('connection', (socket) => {
         console.log('Received chooseRoom event : ', data.roomID)
 
         let indexOfUser = findUser(onlineUsers, socket.id)
-
+        
         console.log('\nonlineUsers', onlineUsers)
         console.log('onlineUsers[indexOfUser]', onlineUsers[indexOfUser])
         console.log('onlineUsers[indexOfUser].roomName', onlineUsers[indexOfUser].roomName, '\n')
@@ -216,6 +216,10 @@ io.on('connection', (socket) => {
             resources[roomID] = processManufacturer(resources[roomID])
 
             sendGameDataToClient(io, socket.id, onlineUsers, rooms, resources[roomID])
+
+            // 將該房間所佔用的遊戲資源給釋放
+            if (resources[roomID].round == 12) 
+                resources[roomID] = undefined
         }
 
     })
@@ -237,6 +241,7 @@ io.on('connection', (socket) => {
         }
     })
 
+    // 取得即時某房所有被佔據的角色
     socket.on('getOccupied', () => {
 
         let indexOfUser = findUser(onlineUsers, socket.id)
