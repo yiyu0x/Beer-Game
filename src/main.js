@@ -38,4 +38,10 @@ router.beforeEach((to, from, next) => {
         eventBus.$emit('exitRoom')
         console.log('您已離開遊戲間')
     }
+
+    if (from.path === '/room' && to.path !== '/game') {
+        eventBus.$emit('errorLog', '您已離開遊戲間')
+        eventBus.$emit('exitRoom')
+        console.log('您已離開遊戲間')
+    }
 })

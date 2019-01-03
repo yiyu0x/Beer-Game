@@ -6,7 +6,6 @@
     <v-toolbar-items>
       <v-btn flat :to="{name: 'home'}">首頁</v-btn>
       <v-btn flat :to="{name: 'lobby'}">大廳</v-btn>
-      <v-btn flat :to="{name: 'game'}">遊玩</v-btn>
       <v-menu>
       <v-btn
         transition="scale-transition"
