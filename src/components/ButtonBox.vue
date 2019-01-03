@@ -53,87 +53,87 @@
     </div>
 </template>
 <script>
-import { eventBus } from "../main";
+import { eventBus } from '../main'
 export default {
     data: () => ({
-        rules: [v => !!v || "can not empty"],
+        rules: [v => !!v || 'can not empty'],
         dialog_login: false,
         dialog_register: false,
-        loginUserName: "",
-        loginUserPasswd: "",
-        registerUserName: "",
-        registerUserPasswd: ""
+        loginUserName: '',
+        loginUserPasswd: '',
+        registerUserName: '',
+        registerUserPasswd: ''
     }),
     methods: {
         login() {
             const data = {
                 username: this.loginUserName,
                 password: this.loginUserPasswd
-            };
-
-            if (this.loginUserName == "" || this.loginUserPasswd == "") {
-                eventBus.$emit("LoginStatus", 0);
-                return;
             }
-            fetch("http://localhost:3000/login", {
-                    method: "post",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data)
-                })
+
+            if (this.loginUserName == '' || this.loginUserPasswd == '') {
+                eventBus.$emit('LoginStatus', 0)
+                return
+            }
+            fetch('http://localhost:3000/login', {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
                 .then(function(response) {
-                    return response.json();
+                    return response.json()
                 })
                 .then(jsonData => {
                     if (jsonData.status == 1) {
                         // 登入成功
-                        this.dialog_login = false;
+                        this.dialog_login = false
                         console.log('event.bus.emit --> LoginStatus')
-                        eventBus.$emit("LoginStatus", jsonData);
+                        eventBus.$emit('LoginStatus', jsonData)
                     } else {
                         // 登入失敗
-                        eventBus.$emit("LoginStatus", jsonData);
+                        eventBus.$emit('LoginStatus', jsonData)
                         console.log('登入失敗 帳號或密碼錯誤')
                     }
                 })
                 .catch(function(err) {
-                    console.log(err);
-                });
+                    console.log(err)
+                })
         },
         submit() {
-            this.dialog_register = false;
+            this.dialog_register = false
 
             const data = {
                 username: this.registerUserName,
                 password: this.registerUserPasswd
-            };
-
-            if (this.registerUserName == "" || this.registerUserPasswd == "") {
-                eventBus.$emit("RegisterStatus", 0);
-                return;
             }
-            fetch("http://localhost:3000/register", {
-                    method: "post",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data)
-                })
+
+            if (this.registerUserName == '' || this.registerUserPasswd == '') {
+                eventBus.$emit('RegisterStatus', 0)
+                return
+            }
+            fetch('http://localhost:3000/register', {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
                 .then(function(response) {
-                    return response.json();
+                    return response.json()
                 })
                 .then(jsonData => {
                     if (jsonData.status == 1) {
                         // 註冊成功
                         // console.log('註冊成功')
-                        eventBus.$emit("RegisterStatus", 1);
+                        eventBus.$emit('RegisterStatus', 1)
                     } else {
                         // 註冊失敗
                         console.log('註冊失敗 用戶已存在')
-                        eventBus.$emit("RegisterStatus", 0);
+                        eventBus.$emit('RegisterStatus', 0)
                     }
                 })
                 .catch(function(err) {
-                    console.log(err);
-                });
+                    console.log(err)
+                })
         }
     }
-};
+}
 </script>

@@ -10,7 +10,7 @@
 <script>
 import ToolBar from './components/ToolBar'
 import AlertLogin from './components/AlertLogin'
-import { userList } from "./main";
+// import { userList } from './main'
 export default {
     name: 'App',
     components: {

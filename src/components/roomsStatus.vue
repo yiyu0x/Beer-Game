@@ -5,7 +5,7 @@
         <v-toolbar-title>遊戲房間</v-toolbar-title>
       </v-toolbar>
       <v-list>
-        <v-list-tile v-for="(item,index) in rooms" avatar @click :key="index">
+        <v-list-tile v-for="(item,index) in rooms" avatar :key="index">
           <v-list-tile-action>
             <v-icon color="orange">star</v-icon>
           </v-list-tile-action>
@@ -19,35 +19,35 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      rooms: []
-    };
-  },
-  created() {
-    this.$socket.emit("fetchRoomList");
-  },
-  sockets: {
-    getRoomList(rooms) {
-      this.rooms = rooms;
-      console.log("getRoomList", rooms);
-      console.log(this.rooms);
-    }
-  },
-  methods: {
-    selectRoom(info) {
-      this.$socket.emit(
-        "chooseRoom",
-        {
-          roomID: info.roomID,
-          roomName: info.roomName
-        },
-        function(err) {
-          console.log(err);
+    data() {
+        return {
+            rooms: []
         }
-      );
-      this.$router.push({ path: "room" });
+    },
+    created() {
+        this.$socket.emit('fetchRoomList')
+    },
+    sockets: {
+        getRoomList(rooms) {
+            this.rooms = rooms
+            console.log('getRoomList', rooms)
+            console.log(this.rooms)
+        }
+    },
+    methods: {
+        selectRoom(info) {
+            this.$socket.emit(
+                'chooseRoom',
+                {
+                    roomID: info.roomID,
+                    roomName: info.roomName
+                },
+                function(err) {
+                    console.log(err)
+                }
+            )
+            this.$router.push({ path: 'room' })
+        }
     }
-  }
-};
+}
 </script>

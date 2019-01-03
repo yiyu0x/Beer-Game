@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "eslint --fix src/*.js",
     "db": "node server/db/app.js",
-    "game": "node server/game/app.js"
+    "game": "node server/game/app.js",
+    "vue-lint": "eslint --fix  src/components/*.vue"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -25,8 +26,8 @@
     "@vue/cli-plugin-eslint": "^3.2.1",
     "@vue/cli-service": "^3.2.2",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
+    "eslint": "^5.11.1",
+    "eslint-plugin-vue": "^5.1.0",
     "eslint-plugin-vuefix": "^0.2.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",

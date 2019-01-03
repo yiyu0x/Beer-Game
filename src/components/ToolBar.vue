@@ -29,28 +29,28 @@
   </v-toolbar>
 </template>
 <script>
-import { eventBus } from "../main";
+import { eventBus } from '../main'
 export default {
-  data() {
-    return {
-      items: [
-        { title: '登出', func: this.logout},
-        { title: '個人資料', func: this.showProfile}
-      ]
-    }
-  },
-  methods: {
-    logout() {
-      const isLogin = sessionStorage.getItem("token") == "ImLogin";
-      if (isLogin) {
-        this.$router.push({ path: "home" });
-        sessionStorage.removeItem("token");
-        eventBus.$emit("LogOut", 1);
-      }
+    data() {
+        return {
+            items: [
+                { title: '登出', func: this.logout},
+                { title: '個人資料', func: this.showProfile}
+            ]
+        }
     },
-    showProfile() {
-        this.$router.push({ path: "profile" });
+    methods: {
+        logout() {
+            const isLogin = sessionStorage.getItem('token') == 'ImLogin'
+            if (isLogin) {
+                this.$router.push({ path: 'home' })
+                sessionStorage.removeItem('token')
+                eventBus.$emit('LogOut', 1)
+            }
+        },
+        showProfile() {
+            this.$router.push({ path: 'profile' })
+        }
     }
-  }
-};
+}
 </script>

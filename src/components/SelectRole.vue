@@ -19,7 +19,7 @@
     </v-layout>
 </template>
 <script>
-import { eventBus } from "../main";
+import { eventBus } from '../main'
 export default {
     data() {
         return {
@@ -32,7 +32,7 @@ export default {
         }
     },
     create() {
-        this.$socket.emit('getOccupied');
+        this.$socket.emit('getOccupied')
     },
     sockets: {
         getRoomList(rooms) {
@@ -40,19 +40,19 @@ export default {
         },
         getOccupiedCharacter(roles) {
             // console.log('hello')
-            this.rolesStatus.Manufacturer = roles.Manufacturer;
-            this.rolesStatus.Distributer = roles.Distributer;
-            this.rolesStatus.Wholesaler = roles.Wholesaler;
-            this.rolesStatus.Retailer = roles.Retailer;
+            this.rolesStatus.Manufacturer = roles.Manufacturer
+            this.rolesStatus.Distributer = roles.Distributer
+            this.rolesStatus.Wholesaler = roles.Wholesaler
+            this.rolesStatus.Retailer = roles.Retailer
         }
     },
     methods: {
         chooseRoles(role) {
             this.$socket.emit('chooseCharacter', role, function(err) {
-                eventBus.$emit("errorLog", err);
+                eventBus.$emit('errorLog', err)
             })
-            this.$router.push({ path: "game" });
+            this.$router.push({ path: 'game' })
         }
     }
-};
+}
 </script>
