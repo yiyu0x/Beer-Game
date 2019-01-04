@@ -1,33 +1,25 @@
 # 軟體工程期末專題 - 啤酒遊戲🍺
 
-## Project setup
-`npm install`
 
-### Run backend server
-`npm run db`
 
-`npm run gmae`
-### Compiles and hot-reloads for development
+## Intro
 
-`npm run serve`
+前端使用 `Vue` 以及 `Vuetify` 製作成的 SPA 網頁，使玩家不論在行動裝置還是在主機上都能有相同的使用體驗。與後端溝通使用 `SocketIO` 來確保遊戲期間的資訊同步的一致性。
 
+部署期間使用 `webpack` 打包程式碼，讓厚重的網頁能減輕傳輸負擔，並且使用 CDN 技術讓世界各地的玩家都在在最短時間完成第一次與後台的溝通。
 
 ## Project Structure
 ```
 ├── LICENSE
 ├── README.md
 ├── babel.config.js
-├── demoSocket
-│   ├── index.html
-│   └── js
-│       └── index.js
 ├── dist
 ├── node_modules
 ├── package-lock.json
 ├── package.json
 ├── public
-│   ├── favicon.ico
-│   └── index.html
+│   ├── ...
+│ 
 ├── server
 │   ├── db
 │   │   ├── app.js
@@ -43,25 +35,31 @@
     │   ├── logo.png
     │   └── logo.svg
     ├── components
-    │   ├── AlertLogin.vue
-    │   ├── ButtonBox.vue
-    │   ├── NewRoom.vue
-    │   ├── SelectRole.vue
-    │   ├── SnackBar.vue
-    │   ├── ToolBar.vue
-    │   ├── UserProfile.vue
-    │   ├── Welcome.vue
-    │   ├── roomsStatus.vue
-    │   └── usersStatus.vue
+    │   ├── ......
+    │   
     ├── main.js
     ├── plugins
     │   └── vuetify.js
     ├── router.js
     └── views
-        ├── About.vue
-        ├── Game.vue
-        ├── Home.vue
-        ├── Lobby.vue
-        ├── Profile.vue
-        └── Room.vue
+        ├── ......
+
 ```
+
+## Tech & Tools
+- Vue - https://vuejs.org/
+- Vuetify - https://vuetifyjs.com/en/
+- SocketIO - https://socket.io/
+- expressJS - https://expressjs.com
+- pm2 - http://pm2.keymetrics.io/
+
+## Project setup
+`npm install`
+
+### Run backend server
+`npm run db`
+
+`npm run gmae`
+### Compiles and hot-reloads for development
+
+`npm run serve`
