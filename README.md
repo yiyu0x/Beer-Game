@@ -22,18 +22,6 @@
 │   └── js
 │       └── index.js
 ├── dist
-│   ├── css
-│   │   ├── about.536a3171.css
-│   │   └── chunk-vendors.04f85cfa.css
-│   ├── favicon.ico
-│   ├── index.html
-│   └── js
-│       ├── about.a5338c21.js
-│       ├── about.a5338c21.js.map
-│       ├── app.c558e8bd.js
-│       ├── app.c558e8bd.js.map
-│       ├── chunk-vendors.04be8ce2.js
-│       └── chunk-vendors.04be8ce2.js.map
 ├── node_modules
 ├── package-lock.json
 ├── package.json
