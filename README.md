@@ -132,3 +132,8 @@
 **`gameover`**
 
 - 當遊戲來到局末點通知剛房內的所有玩家
+
+## Contributors
+- [yiyu0x](https://github.com/yiyu0x) : frontend, deployment
+- [OliWave](https://github.com/OliverWangWei) : backend
+- Hangyan : bug report, UI design, gaming logic design
