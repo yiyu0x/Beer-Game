@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
 //CORS fixed
 app.all('*', function (req, res, next) {
     // console.log('debug: ', req.method)
