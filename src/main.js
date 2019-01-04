@@ -6,7 +6,8 @@ import router from './router'
 import VueSocketIO from 'vue-socket.io'
 Vue.use(new VueSocketIO({
     debug: true,
-    connection: 'http://localhost:6969',
+    connection: 'http://yiyu0x.tk:6969'
+    // connection: 'http://localhost:6969',
 }))
 
 Vue.use(Vuetify)
