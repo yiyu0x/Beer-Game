@@ -63,3 +63,8 @@
 ### Compiles and hot-reloads for development
 
 `npm run serve`
+
+## Contributors
+- [yiyu0x](https://github.com/yiyu0x) : frontend, deployment
+- OlivWave : 
+- Hangyan : bug report, UI design, gaming logic design
