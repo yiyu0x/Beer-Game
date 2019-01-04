@@ -1,23 +1,19 @@
-# beer🍺
+# 軟體工程期末專題 - 啤酒遊戲🍺
 
 ## Project setup
-```
-npm install
-```
-### Run api server
-```
-npm run db
-```
+`npm install`
+
+### Run backend server
+`npm run db`
+
+`npm run gmae`
 ### Compiles and hot-reloads for development
-```
-npm run serve
-```
-### Run linting and fix error
-```
-npm run lint
-```
+
+`npm run serve`
+
 
 ## Project Structure
+```
 ├── LICENSE
 ├── README.md
 ├── babel.config.js
@@ -80,3 +76,4 @@ npm run lint
         ├── Lobby.vue
         ├── Profile.vue
         └── Room.vue
+```
