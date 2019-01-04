@@ -68,3 +68,17 @@
 
 ## The API Of Socket IO 
 
+- `Socket IO server` 所要監聽來自 `client` 的事件
+  - socket.on('init'
+socket.on('createRoom'
+socket.on('fetchOnlineClients'
+socket.on('fetchRoomList'
+socket.on('chooseRoom'
+socket.on('chooseCharacter'
+socket.on('getRole'
+socket.on('sendData'
+socket.on('exitRoom'
+socket.on('getOccupied'
+socket.on('logout'
+socket.on('disconnect'
+
