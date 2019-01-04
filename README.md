@@ -66,7 +66,7 @@
 
 ## The API Of SocketIO
 
-前後端透過定義共同的 `SocketIO` 介面, 不限定在前端或端只要一個 `發送 emit` 一個 `接收 on` 就可以達成即時的資訊交流和共享. 
+前後端透過定義共同的 `SocketIO` 介面，不限定在前端或後端只要一個 `發送 emit` 一個 `接收 on` 就可以達成即時的資訊交流和共享. 
 
 ### The events that clients can emit to SocketIO server
 
