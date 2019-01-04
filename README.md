@@ -1,23 +1,19 @@
-# beer🍺
+# 軟體工程期末專題 - 啤酒遊戲🍺
 
 ## Project setup
-```
-npm install
-```
-### Run api server
-```
-npm run db
-```
+`npm install`
+
+### Run backend server
+`npm run db`
+
+`npm run gmae`
 ### Compiles and hot-reloads for development
-```
-npm run serve
-```
-### Run linting and fix error
-```
-npm run lint
-```
+
+`npm run serve`
+
 
 ## Project Structure
+```
 ├── LICENSE
 ├── README.md
 ├── babel.config.js
@@ -26,18 +22,6 @@ npm run lint
 │   └── js
 │       └── index.js
 ├── dist
-│   ├── css
-│   │   ├── about.536a3171.css
-│   │   └── chunk-vendors.04f85cfa.css
-│   ├── favicon.ico
-│   ├── index.html
-│   └── js
-│       ├── about.a5338c21.js
-│       ├── about.a5338c21.js.map
-│       ├── app.c558e8bd.js
-│       ├── app.c558e8bd.js.map
-│       ├── chunk-vendors.04be8ce2.js
-│       └── chunk-vendors.04be8ce2.js.map
 ├── node_modules
 ├── package-lock.json
 ├── package.json
@@ -80,3 +64,4 @@ npm run lint
         ├── Lobby.vue
         ├── Profile.vue
         └── Room.vue
+```
