@@ -240,10 +240,8 @@ const sendGameDataToClient = (io, id, users, rooms, resource) => {
         }
 
         gamingResult.sort((a, b) => {
-            return b.cost - a.cost
+            return a.cost - b.cost
         })
-
-
 
         io.to(users[indexOfUser].roomID).emit('gameover', gamingResult)
 
