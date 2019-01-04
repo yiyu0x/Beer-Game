@@ -65,3 +65,6 @@
         ├── Profile.vue
         └── Room.vue
 ```
+
+## The API Of Socket IO 
+
