@@ -136,4 +136,3 @@
 ## Contributors
 - [yiyu0x](https://github.com/yiyu0x) : frontend, deployment
 - [OliWave](https://github.com/OliverWangWei) : backend
-- Hangyan : bug report, UI design, gaming logic design
